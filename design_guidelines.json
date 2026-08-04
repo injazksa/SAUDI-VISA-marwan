@@ -1,0 +1,147 @@
+{
+  "theme_strategy": {
+    "primary_theme": "light",
+    "description": "Editorial Luxury & Trust. An Awwwards-level, premium marketing site for an accredited Saudi embassy services office. Relies on heavy negative space, refined typography, and purposeful motion. Avoids generic corporate templates by using stark contrasts, oversized typography, and intentional asymmetry.",
+    "colors": {
+      "brand_primary": "#006C35",
+      "brand_primary_dark": "#024D26",
+      "brand_accent_gold": "#C5A059",
+      "background_light": "#FAFAFA",
+      "surface_light": "#FFFFFF",
+      "surface_green": "#013B1E",
+      "text_primary_dark": "#111827",
+      "text_secondary_dark": "#4B5563",
+      "text_primary_light": "#F9FAFB",
+      "border_subtle": "rgba(0, 0, 0, 0.08)",
+      "border_green_subtle": "rgba(0, 108, 53, 0.2)"
+    },
+    "forbidden_colors": ["#1B93A4", "#7351B7", "#000000"]
+  },
+  "typography": {
+    "font_families": {
+      "headings": "'Alexandria', sans-serif",
+      "body": "'IBM Plex Sans Arabic', sans-serif",
+      "numerals": "'Alexandria', sans-serif"
+    },
+    "hierarchy": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1]",
+      "h2": "text-4xl md:text-5xl font-medium tracking-tight leading-tight",
+      "h3": "text-2xl md:text-3xl font-medium leading-snug",
+      "body_lg": "text-lg md:text-xl font-light leading-relaxed text-gray-600",
+      "body": "text-base font-normal leading-relaxed text-gray-600",
+      "overline": "text-xs md:text-sm font-bold tracking-[0.15em] uppercase text-brand_primary",
+      "massive_number": "text-7xl md:text-9xl font-black opacity-10"
+    },
+    "rtl_guidelines": "The entire application MUST have dir=\"rtl\" on the HTML tag. Use Tailwind logical properties (e.g., ps-, pe-, ms-, me-, text-start, text-end, border-s, border-e) instead of pl-, pr-, ml-, mr-, text-left, text-right to ensure flawless RTL rendering."
+  },
+  "layout_and_spacing": {
+    "container": "max-w-[1400px] mx-auto px-6 md:px-12",
+    "section_padding": "py-20 md:py-32 lg:py-40",
+    "grid_system": "Use The Swiss Grid and Bento asymmetric variations. Avoid default equal-width columns. Favor 12-column grids where content spans 5-7 columns leaving massive negative space on the opposite side.",
+    "borders": "Use 1px borders (border-border_subtle) to create structural 'architectural' lines in the design. Cards should have no shadow, only crisp 1px borders."
+  },
+  "motion_and_interactions": {
+    "libraries": ["framer-motion", "lenis", "react-fast-marquee"],
+    "hero_reveal": "Kinetic line-by-line masked reveal. Wrap each line of the H1 in a hidden overflow span, and translate Y from 100% to 0% over 1s with a custom cubic-bezier(0.76, 0, 0.24, 1).",
+    "scroll_behavior": "Implement Lenis for smooth momentum scrolling globally.",
+    "hover_states": "Interactive elements should not just change color. Images should slightly scale up (scale-105) within a clipped overflow-hidden wrapper. Buttons should feature an arrow that translates horizontally.",
+    "marquee": "Use react-fast-marquee for an editorial ribbon. Slow speed (speed=30). Text should be oversized, outline style (text-transparent webkit-text-stroke-1 webkit-text-stroke-brand_primary) alternating with solid text."
+  },
+  "component_specs": {
+    "header": {
+      "style": "Glassmorphism. backdrop-blur-xl bg-white/70. Fixed top. z-50. Border bottom 1px solid rgba(0,0,0,0.05).",
+      "layout": "Logo on the start (right in RTL), navigation links in center, Contact CTA (WhatsApp icon + number) on the end (left in RTL)."
+    },
+    "buttons": {
+      "primary": "bg-brand_primary text-white rounded-none px-8 py-4 text-sm font-medium hover:bg-brand_primary_dark transition-colors duration-300 flex items-center gap-3",
+      "secondary": "bg-transparent border border-brand_primary text-brand_primary rounded-none px-8 py-4 text-sm font-medium hover:bg-brand_primary/5 transition-colors duration-300 flex items-center gap-3"
+    },
+    "cards": {
+      "service_card": "p-8 md:p-12 border border-border_subtle bg-white hover:border-brand_primary transition-colors duration-500 group flex flex-col justify-between h-full min-h-[300px]",
+      "step_card": "relative p-8 border-t border-border_subtle. Massive background numeral. Clear, concise step description."
+    },
+    "accordion_faq": {
+      "style": "Minimalist. border-b border-border_subtle py-6. Question text is text-2xl font-light. Plus/Minus icon interaction."
+    }
+  },
+  "page_sections_blueprint": [
+    {
+      "name": "Hero Section",
+      "features": "Split layout or full-screen overlay. Kinetic text reveal of 'مكتب المتخصصة لإنجاز معاملات السفارة السعودية'. Image slider transitioning between abstract emerald textures and Riyadh skyline. Overlaid with subtle noise texture. Scroll down indicator."
+    },
+    {
+      "name": "Editorial Marquee",
+      "features": "Infinite slow scrolling text: 'مكتب معتمد ومرخص للسفارة السعودية في الأردن • السرعة • الموثوقية • الإنجاز •'."
+    },
+    {
+      "name": "Services (Our Expertise)",
+      "features": "Bento grid or asymmetrical list revealing services: تأشيرات العمل, تصديق الوثائق, الاعتماد المهني, خدمات الشركات. Use high-contrast hover effects."
+    },
+    {
+      "name": "Process (How We Work / Manifesto)",
+      "features": "Numbered chapters (01, 02, 03) detailing the frictionless process. Large typography, structural lines."
+    },
+    {
+      "name": "Trust & Accreditation (Why Us)",
+      "features": "Spotlight on official stamps, documents, and accreditation. Highlighting speed and flawlessness."
+    },
+    {
+      "name": "FAQ",
+      "features": "Clean accordion for common questions."
+    },
+    {
+      "name": "Contact & Footer",
+      "features": "Massive typography 'تواصل معنا'. Direct Phone and WhatsApp CTAs. Address: 1st Circle - Jabal Amman. Hours: Sun-Thu 9AM-4PM. Links to Legal Pages (Privacy Policy, Terms of Use)."
+    }
+  ],
+  "image_assets": {
+    "hero_slider": [
+      {
+        "url": "https://images.unsplash.com/photo-1694018359679-49465b4c0d61?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwxfHxzYXVkaSUyMGFyYWJpYSUyMHJpeWFkaCUyMG1vZGVybiUyMGFyY2hpdGVjdHVyZSUyMHNreWxpbmV8ZW58MHx8fHwxNzg1ODgwMDk4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Riyadh modern skyline (Kingdom Centre)",
+        "category": "hero"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1590018363780-f0d10b4fc043?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBhYnN0cmFjdCUyMGVsZWdhbnQlMjBlbWVyYWxkJTIwZ3JlZW4lMjB0ZXh0dXJlfGVufDB8fHxncmVlbnwxNzg1ODgwMDgwfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract emerald green fluid texture",
+        "category": "hero_abstract"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1604157886233-08985afc49e9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwzfHxBbW1hbiUyMEpvcmRhbiUyMGNpdHlzY2FwZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3ODU4ODAwODB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Amman Jordan cityscape",
+        "category": "location_context"
+      }
+    ],
+    "trust_documents": [
+      {
+        "url": "https://images.unsplash.com/photo-1774891937400-b5e32f719fae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkb2N1bWVudCUyMHNpZ25hdHVyZSUyMHN0YW1wJTIwY2xvc2UlMjB1cHxlbnwwfHx8fDE3ODU4ODAwODB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Professional wooden stamp on desk",
+        "category": "accreditation"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1774891937497-96df6a794bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBkb2N1bWVudCUyMHNpZ25hdHVyZSUyMHN0YW1wJTIwY2xvc2UlMjB1cHxlbnwwfHx8fDE3ODU4ODAwODB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Wax seal stamp",
+        "category": "official_documents"
+      }
+    ]
+  },
+  "testing": {
+    "attributes": "All interactive elements, buttons, accordion toggles, and navigation links MUST include a 'data-testid' attribute (e.g., data-testid='nav-contact-button', data-testid='faq-accordion-item-1')."
+  },
+  "instructions_to_main_agent": [
+    "Initialize standard React app with Tailwind CSS.",
+    "Add 'dir=\"rtl\"' to the root HTML element in index.html.",
+    "Install and configure @fontsource/alexandria and @fontsource/ibm-plex-sans-arabic.",
+    "Install 'framer-motion', '@studio-freight/lenis', 'react-fast-marquee', and 'lucide-react'.",
+    "Do NOT use HTML forms or database logic. The CTA buttons should strictly be 'href=\"tel:+962792622210\"' or 'href=\"https://wa.me/962792622210\"'.",
+    "Use logical Tailwind properties (ps, pe, text-start) for perfect RTL support.",
+    "Create a dedicated Legal Layout for Privacy Policy and Terms of Use pages.",
+    "Ensure 'Awwwards' level finish: implement custom cursor, smooth scrolling, and scroll-triggered animations for all sections."
+  ],
+  "universal_guidelines": [
+    "Never center-align long blocks of text; text-start (right-aligned in RTL) is mandatory for readability.",
+    "Implement high-end glassmorphism for sticky headers (blur-xl, saturate-150, light background opacity).",
+    "Use 2-3x more spacing than default templates. Sections should breathe.",
+    "Do not use default system fonts. Typography is the main visual driver here."
+  ]
+}
