@@ -1,37 +1,20 @@
 import { BRAND } from "@/lib/content";
 
-// شعار أصلي مميّز — ختم هندسي بالهوية السعودية (أخضر/أبيض) مع لمسة ذهبية
-export const LogoMark = ({ size = 44, className = "" }) => (
-  <svg
+// الشعار: صورة الختم الرسمية بخلفية شفافة
+export const LogoMark = ({ size = 48, className = "" }) => (
+  <img
+    src="/logo.png"
+    alt={BRAND.fullName}
     width={size}
     height={size}
-    viewBox="0 0 64 64"
-    fill="none"
-    className={className}
-    aria-hidden="true"
-  >
-    <rect x="2" y="2" width="60" height="60" rx="14" fill="#006C35" />
-    <rect
-      x="7.5"
-      y="7.5"
-      width="49"
-      height="49"
-      rx="10"
-      stroke="#C5A059"
-      strokeWidth="1.2"
-      opacity="0.85"
-    />
-    {/* نجمة/بوصلة الإنجاز */}
-    <path
-      d="M32 14 L36 28 L50 32 L36 36 L32 50 L28 36 L14 32 L28 28 Z"
-      fill="#ffffff"
-    />
-    <circle cx="32" cy="32" r="4.2" fill="#006C35" />
-    <circle cx="32" cy="32" r="4.2" stroke="#C5A059" strokeWidth="1" />
-  </svg>
+    className={`object-contain ${className}`}
+    style={{ width: size, height: size }}
+    loading="eager"
+    decoding="async"
+  />
 );
 
-export const Logo = ({ light = false, size = 44, stacked = true }) => {
+export const Logo = ({ light = false, size = 50, stacked = true }) => {
   const nameColor = light ? "text-white" : "text-brand-ink";
   const tagColor = light ? "text-white/70" : "text-brand";
   return (

@@ -8,6 +8,8 @@ import Services from "@/components/Services";
 import Process from "@/components/Process";
 import Trust from "@/components/Trust";
 import About from "@/components/About";
+import Testimonials from "@/components/Testimonials";
+import Blog from "@/components/Blog";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -37,8 +39,10 @@ export default function Home() {
           <EditorialMarquee />
           <Services />
           <Process />
-          <Trust />
           <About />
+          <Trust />
+          <Testimonials />
+          <Blog />
           <Faq />
           <Contact />
         </main>
