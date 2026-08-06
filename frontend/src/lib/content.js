@@ -9,7 +9,7 @@ import {
   Eye,
   Handshake,
   Plane,
-  KeyRound,
+  FileSignature,
 } from "lucide-react";
 
 // صور محلية (مولّدة خصيصاً — بدون نصوص، بهوية أخضر/أبيض/ذهبي)
@@ -217,7 +217,7 @@ export const BLOG = [
   },
   {
     slug: "power-of-attorney-eauth",
-    icon: KeyRound,
+    icon: FileSignature,
     title: "الوكالات والتفويض الإلكتروني: ما تحتاج معرفته",
     excerpt:
       "متى تحتاج وكالة أو تفويضاً إلكترونياً، وكيف نُنجز لك هذه المعاملات لدى السفارة السعودية بسهولة.",

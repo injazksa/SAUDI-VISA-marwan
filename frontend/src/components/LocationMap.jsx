@@ -1,10 +1,10 @@
 import { MapPin, ExternalLink } from "lucide-react";
 import { CONTACT } from "@/lib/content";
 
-// إحداثيات الدوّار الأول — جبل عمّان
-const LAT = 31.9522;
-const LNG = 35.9294;
-const BBOX = `${LNG - 0.006},${LAT - 0.003},${LNG + 0.006},${LAT + 0.003}`;
+// إحداثيات الدوّار الأول — جبل عمّان (Duwwar Al-Awwal, Jabal Amman)
+const LAT = 31.9528;
+const LNG = 35.9283;
+const BBOX = `${LNG - 0.0045},${LAT - 0.0025},${LNG + 0.0045},${LAT + 0.0025}`;
 
 export default function LocationMap() {
   const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${BBOX}&layer=mapnik&marker=${LAT},${LNG}`;
