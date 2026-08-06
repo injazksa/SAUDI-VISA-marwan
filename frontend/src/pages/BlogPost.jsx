@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, MessageCircle } from "lucide-react";
+import { ArrowRight, Clock, MessageCircle, BookOpen } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import { BLOG, CONTACT, BRAND } from "@/lib/content";
+
+const BASE = "https://saudi-services-hub-2.preview.emergentagent.com";
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -17,11 +19,45 @@ export default function BlogPost() {
       document.title = `${post.title} | ${BRAND.fullName}`;
       const md = document.querySelector('meta[name="description"]');
       if (md) md.setAttribute("content", post.excerpt);
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        dateModified: post.date,
+        inLanguage: "ar",
+        keywords: post.keywords,
+        articleBody: post.body.map((s) => s.p).join(" "),
+        author: { "@type": "Organization", name: BRAND.fullName },
+        publisher: {
+          "@type": "Organization",
+          name: BRAND.fullName,
+          logo: { "@type": "ImageObject", url: `${BASE}/logo.png` },
+        },
+        mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE}/blog/${slug}` },
+      });
+      const bc = document.createElement("script");
+      bc.type = "application/ld+json";
+      bc.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "الرئيسية", item: `${BASE}/` },
+          { "@type": "ListItem", position: 2, name: "المدونة", item: `${BASE}/#blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: `${BASE}/blog/${slug}` },
+        ],
+      });
+      document.head.appendChild(script);
+      document.head.appendChild(bc);
+      return () => {
+        script.remove();
+        bc.remove();
+        document.title = "مكتب المتخصصة لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
+      };
     }
-    return () => {
-      document.title =
-        "مكتب المتخصصة لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
-    };
   }, [slug, post]);
 
   if (!post) {
@@ -38,21 +74,28 @@ export default function BlogPost() {
   }
 
   const related = BLOG.filter((p) => p.slug !== slug).slice(0, 2);
+  const Icon = post.icon || BookOpen;
 
   return (
     <div className="bg-paper min-h-screen" data-testid={`blog-post-${slug}`}>
       <Header isHome={false} />
       <main className="pt-[76px]">
-        {/* رأس */}
+        {/* رأس أيقوني بدل الصورة */}
         <section className="relative bg-brand-ink text-white overflow-hidden">
-          <div className="absolute inset-0">
-            <img src={post.image.replace(/w=\d+&h=\d+/, "w=1600&h=900")} alt={post.title} className="w-full h-full object-cover opacity-25" />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/85 to-brand-ink/70" />
+          <div className="noise-overlay opacity-[0.05]" />
+          <div className="absolute -top-16 -end-16 pointer-events-none">
+            <Icon size={340} strokeWidth={0.8} className="text-brand-gold/10" />
           </div>
           <div className="container-x relative z-10 py-20 md:py-28 max-w-4xl">
             <Link to="/#blog" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm mb-6" data-testid="blogpost-back">
               <ArrowRight size={16} /> العودة للمدونة
             </Link>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-14 h-14 border border-brand-gold/40 flex items-center justify-center text-brand-gold">
+                <Icon size={26} strokeWidth={1.5} />
+              </div>
+              <span className="text-brand-gold text-xs tracking-[0.2em] uppercase">مقال إرشادي</span>
+            </div>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -69,7 +112,6 @@ export default function BlogPost() {
           </div>
         </section>
 
-        {/* المحتوى */}
         <section className="py-16 md:py-24">
           <div className="container-x max-w-3xl">
             <p className="text-lg md:text-xl text-brand-ink font-light leading-loose mb-12 pb-12 border-b border-black/10">
@@ -98,7 +140,6 @@ export default function BlogPost() {
               </a>
             </div>
 
-            {/* مقالات ذات صلة */}
             <div className="mt-16">
               <h3 className="overline mb-6">اقرأ أيضاً</h3>
               <div className="grid sm:grid-cols-2 gap-6">

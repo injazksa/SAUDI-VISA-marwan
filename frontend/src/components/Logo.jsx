@@ -23,7 +23,7 @@ export const Logo = ({ light = false, size = 50, stacked = true }) => {
       {stacked && (
         <div className="flex flex-col leading-tight">
           <span className={`font-heading font-bold text-base md:text-lg ${nameColor}`}>
-            المتخصصة
+            مكتب المتخصصة
           </span>
           <span className={`text-[10px] md:text-[11px] font-medium ${tagColor}`}>
             لإنجاز معاملات السفارة السعودية

@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, MessageCircle, Phone } from "lucide-react";
 import { MaskedLines } from "@/components/Reveal";
 import { HERO, CONTACT } from "@/lib/content";
 
 export default function Hero() {
-  const [active, setActive] = useState(0);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -13,14 +12,7 @@ export default function Hero() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  useEffect(() => {
-    const t = setInterval(
-      () => setActive((p) => (p + 1) % HERO.slides.length),
-      5000
-    );
-    return () => clearInterval(t);
-  }, []);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.15]);
 
   return (
     <section
@@ -29,30 +21,19 @@ export default function Hero() {
       className="relative min-h-[100svh] w-full overflow-hidden bg-brand-ink"
       data-testid="hero-section"
     >
-      {/* السلايدر */}
-      <div className="absolute inset-0">
-        {HERO.slides.map((s, i) => (
-          <div
-            key={i}
-            className="hero-slide absolute inset-0"
-            style={{
-              opacity: i === active ? 1 : 0,
-              transform: i === active ? "scale(1.08)" : "scale(1)",
-            }}
-          >
-            <img
-              src={s.url}
-              alt={s.alt}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
+      <motion.div className="absolute inset-0" style={{ scale: bgScale }}>
+        <img
+          src={HERO.image}
+          alt="مكتب المتخصصة — أعلام الأردن والسعودية"
+          className="w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/70 to-brand-ink/40" />
-        <div className="absolute inset-0 bg-brand-ink/20" />
+        <div className="absolute inset-0 bg-brand-ink/25" />
         <div className="noise-overlay" />
-      </div>
+      </motion.div>
 
-      {/* المحتوى */}
       <motion.div
         style={{ y, opacity }}
         className="relative z-10 container-x min-h-[100svh] flex flex-col justify-center pt-24 pb-32"
@@ -68,11 +49,7 @@ export default function Hero() {
         </motion.p>
 
         <h1 className="font-heading font-light text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tight max-w-5xl">
-          <MaskedLines
-            lines={HERO.titleLines}
-            startDelay={0.35}
-            lineClassName=""
-          />
+          <MaskedLines lines={HERO.titleLines} startDelay={0.35} />
         </h1>
 
         <motion.p
@@ -111,7 +88,6 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* إحصاءات */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -130,35 +106,19 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* مؤشرات السلايدر + التمرير */}
-      <div className="absolute bottom-8 inset-x-0 z-10 container-x flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          {HERO.slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              aria-label={`الشريحة ${i + 1}`}
-              data-testid={`hero-slide-dot-${i}`}
-              className={`h-1 rounded-full transition-all duration-500 ${
-                i === active ? "w-10 bg-brand-gold" : "w-4 bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
-        <a
-          href="#services"
-          className="hidden md:flex items-center gap-2 text-white/70 text-xs tracking-widest hover:text-white transition-colors"
-          data-testid="hero-scroll-indicator"
+      <a
+        href="#services"
+        className="absolute bottom-8 start-6 md:start-12 z-10 hidden md:flex items-center gap-2 text-white/70 text-xs tracking-widest hover:text-white transition-colors"
+        data-testid="hero-scroll-indicator"
+      >
+        مرّر للأسفل
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.6 }}
         >
-          مرّر للأسفل
-          <motion.span
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.6 }}
-          >
-            <ArrowDown size={16} />
-          </motion.span>
-        </a>
-      </div>
+          <ArrowDown size={16} />
+        </motion.span>
+      </a>
     </section>
   );
 }

@@ -97,16 +97,11 @@ export default function ServicePage() {
     <div className="bg-paper min-h-screen" data-testid={`service-page-${slug}`}>
       <Header isHome={false} />
       <main className="pt-[76px]">
-        {/* الرأس */}
+        {/* رأس أيقوني بدل الصورة */}
         <section className="relative bg-brand-ink text-white overflow-hidden">
-          <div className="absolute inset-0">
-            <img
-              src={service.image}
-              alt={service.title}
-              className="w-full h-full object-cover opacity-25"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/85 to-brand-ink/70" />
+          <div className="noise-overlay opacity-[0.05]" />
+          <div className="absolute -top-16 -end-16 pointer-events-none">
+            <Icon size={340} strokeWidth={0.8} className="text-brand-gold/10" />
           </div>
           <div className="container-x relative z-10 py-20 md:py-28 max-w-4xl">
             <Link
