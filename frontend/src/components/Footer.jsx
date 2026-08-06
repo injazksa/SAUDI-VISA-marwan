@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, MessageCircle, MapPin } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
-import LocationMap from "@/components/LocationMap";
 import { NAV, CONTACT, BRAND } from "@/lib/content";
 
 export default function Footer({ isHome = true }) {
@@ -9,9 +8,7 @@ export default function Footer({ isHome = true }) {
   const anchor = (href) => (isHome ? href : `/${href}`);
 
   return (
-    <>
-      <LocationMap />
-      <footer className="bg-brand-ink text-white border-t border-white/10" data-testid="site-footer">
+    <footer className="bg-brand-ink text-white border-t border-white/10" data-testid="site-footer">
       <div className="container-x py-16 md:py-20">
         <div className="grid md:grid-cols-[1.4fr_1fr_1fr] gap-12">
           {/* العلامة */}
@@ -118,6 +115,5 @@ export default function Footer({ isHome = true }) {
         </div>
       </div>
     </footer>
-    </>
   );
 }
