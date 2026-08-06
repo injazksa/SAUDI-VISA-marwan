@@ -15,7 +15,7 @@ import { Reveal } from "@/components/Reveal";
 import { SERVICES, CONTACT, BRAND } from "@/lib/content";
 import { SERVICE_DETAILS } from "@/lib/services";
 
-const BASE = "https://saudi-services-hub-2.preview.emergentagent.com";
+const BASE = typeof window !== "undefined" ? window.location.origin : "";
 
 export default function ServicePage() {
   const { slug } = useParams();

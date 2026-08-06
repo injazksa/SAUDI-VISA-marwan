@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import { BLOG, CONTACT, BRAND } from "@/lib/content";
 
-const BASE = "https://saudi-services-hub-2.preview.emergentagent.com";
+const BASE = typeof window !== "undefined" ? window.location.origin : "";
 
 export default function BlogPost() {
   const { slug } = useParams();
