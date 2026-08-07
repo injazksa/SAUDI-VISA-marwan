@@ -1,0 +1,55 @@
+# تهيئة Netlify لمشروع React (CRA + craco) داخل مجلد frontend
+
+[build]
+  base = "frontend"
+  command = "yarn install --frozen-lockfile && yarn build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  YARN_VERSION = "1.22.22"
+  # لا تفشل عند وجود تحذيرات ESLint (سلوك CI الافتراضي لـCRA)
+  CI = "false"
+  # تفادي بعض مشاكل الذاكرة أثناء البناء
+  GENERATE_SOURCEMAP = "false"
+
+# مطلوب — SPA fallback لجميع مسارات React Router (services/blog/privacy/terms/...)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# تخزين طويل للأصول الثابتة (صور، خطوط، JS/CSS بعد الهاش)
+[[headers]]
+  for = "/gen/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ترويسات أمان أساسية لصفحات HTML
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
