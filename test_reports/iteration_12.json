@@ -1,0 +1,35 @@
+{
+  "summary": "Iteration 12 frontend-only verification of the marquee continuity fix on the preview URL. The -50% keyframe change IS applied and correct (verified in stylesheet and via computed transform: track width 4064px desktop, translate sweeps 0 -> ~-2032px = exactly 50%). HOWEVER the marquee still goes BLANK: continuity sampling every 2.5s over a full 45s cycle gives 0/19 passing samples on BOTH 1440 and 390. New root cause found: the track is RIGHT-anchored because its containing block (.marquee-section) is RTL, so the max-content track overflows to the LEFT (inner.offsetLeft = -2624). Moving it further left empties the viewport from the right edge. Proven fix (validated live in-browser): make the containing block LTR — 19/19 samples then show FULL coverage (1440/1440 at every timestamp).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Marquee / .marquee-section (index.css)", "issue": "MARQUEE STILL GOES BLANK (bug persists despite the -50% fix). dir=\"ltr\" is set on .marquee-inner, but its CONTAINING BLOCK (.marquee-section, inherits html dir=rtl) is RTL, so the width:max-content track is right-anchored: computed inner.offsetLeft = -2624 (track spans -2624..1440 at translate 0). Row1 = -2624..-592, Row2 = -592..1440. Animating to -50% (-2032px) drags both rows off to the LEFT with nothing entering from the right. Measured coverage desktop 1440: t=0 -> 1327/1440, decaying linearly to 0/1440 from t=30s to t=40s, snapping back at 42.5s. Mobile 390: 329/390 at t=0, 0/390 from t=10s to t=42.5s. 0/19 samples pass on both viewports. VERIFIED FIX: set direction:ltr on the containing block (e.g. add `.marquee-section { direction: ltr; }` in index.css, or move dir=\"ltr\" from the inner div to the <section> in Marquee.jsx). Injecting sec.style.direction='ltr' live produced 1440/1440 coverage at ALL 19 timestamps across the full cycle (rects: row1 -87..1945, row2 1945..3977 at t=0, sliding leftwards with row2 always refilling the right side).", "selector": ".marquee-section / .marquee-inner", "priority": "CRITICAL"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_working": [
+    "@keyframes marquee-slide now ends at translate3d(-50%,0,0) (index.css line 129-132) — confirmed; max computed translate approaches -2032px on a 4064px track (desktop) and -1529px on a 3058px track (mobile), i.e. exactly one row width.",
+    "Dual-content structure intact: 1 .marquee-inner > 2 .marquee-content (2032px each desktop / 1529px each mobile), 12 .marquee-item total.",
+    "animation-name marquee-slide, duration 45s, iteration-count infinite; transform changes continuously leftwards.",
+    "No console errors on home at 1440/390 (only a pre-existing Lenis warning: 'Please ensure that the container has a non-static position...' — cosmetic, consider adding position:relative to the Lenis wrapper).",
+    "Header/hero render correctly on both viewports (screenshots); no horizontal overflow observed."
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Make the marquee track LTR-anchored: add `.marquee-section { direction: ltr; }` to index.css (or set dir=\"ltr\" on the <section> instead of the inner div in Marquee.jsx). Keep the -50% keyframe as-is. This was validated live and yields 100% coverage across the whole cycle.",
+    "Optional: add position:relative to the Lenis scroll container to clear the console warning."
+  ],
+  "critical_code_review_comments": [
+    "dir=\"ltr\" on the animated element itself does not change how the parent's RTL formatting context places an overflowing max-content block — the block's inline-start is the RIGHT edge, so overflow goes left. The direction must be set on the ancestor that establishes the containing block.",
+    "Text order inside each row is unaffected by making the section LTR because each .marquee-item's inner Arabic spans keep their own bidi resolution; visually confirmed content still rendered correctly during the live test."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "0% on the primary marquee-continuity criterion (0/19 samples on 1440 and 390); other structural/animation assertions pass"},
+  "seed_data_creation": "None",
+  "should_call_test_agent_after_fix": true,
+  "should_main_agent_self_test": false,
+  "test_credentials": "None required",
+  "context_for_next_testing_agent": "Re-run the same coverage sampling (union of clipped .marquee-content rects vs window.innerWidth, every 2.5s for 19 samples) at 1440 and 390 after the direction:ltr fix. Expect >= viewport width at every sample. Full iteration_11 regression set (fonts, cv-auto, Lenis gating, 8 blog cards, service/legal/404 routes, mobile menu, build) was already verified and was not re-run this iteration.",
+  "rca_of_the_issue": "Two separate defects existed. (1) Fixed in iteration 12: keyframe end state -100% -> -50%. (2) Still open: the .marquee-inner track (width:max-content, 4064px) lives inside an RTL containing block, so it is laid out right-aligned with offsetLeft -2624; the whole track already sits to the LEFT of the viewport. A negative (leftward) translation therefore evacuates the viewport instead of cycling content in from the right, producing a 100% empty band for ~10-32s of every 45s cycle. Fix = left-anchor the track by making the containing block LTR; verified 19/19 full-coverage samples after applying direction:ltr to .marquee-section at runtime."
+}

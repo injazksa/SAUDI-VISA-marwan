@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only testing of iteration 11 (marquee dual-content rewrite + perf optimizations) on the preview URL. DOM structure, fonts, cv-auto content-visibility, Lenis gating, regressions (blog cards, mobile menu, service/legal/404/blog-post routes) and production build all verified. CRITICAL: the marquee still goes completely EMPTY — the user-reported bug is NOT fixed. Root cause: animation translates the whole track (which contains BOTH rows) by -100%, so both copies scroll off-screen; it must be -50%.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Marquee / index.css @keyframes marquee-slide", "issue": "MARQUEE GOES BLANK. .marquee-inner is 4064px (two 2032px .marquee-content rows) and the keyframe animates transform 0 -> translate3d(-100%,0,0). -100% is relative to the TRACK width (both rows = 4064px), so after ~half the cycle both copies are fully off-screen. Measured visible coverage on desktop 1440: t=0 -> 1390/1440 (already a 50px void at the right edge), t=5s -> 939, t=10s -> 486, t=15s -> 33, t=17.5s -> 0/1440 (completely empty band) then it snaps back at 45s. Same on mobile 390: coverage 351/390 at t=0 and 0/390 after 12s. FIX: keyframe `to { transform: translate3d(-50%, 0, 0); }` (with two identical rows) OR keep -100% but move the animation onto each .marquee-content. Also ensure one row width >= viewport (2032px is fine) so no initial gap remains after the -50% fix.", "selector": ".marquee-inner", "priority": "CRITICAL"},
+      {"component": "Marquee", "issue": "Minor: at t=0 the track's right edge sits at x=1390 on a 1440 viewport (50px void). Caused by track starting at translate 0 while RTL layout anchors overflow to the left; will be resolved by the -50% fix + ensuring content overshoots the viewport.", "selector": ".marquee-content", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_working": [
+    "DOM structure: section[data-testid=marquee-section] has exactly 1 .marquee-inner with exactly 2 .marquee-content children, 6 .marquee-item each (12 total).",
+    "Font clarity: all 12 text spans have font-body + font-semibold + text-brand, computed color rgb(0,108,53) for every one; no faded/opacity-30 variants. Font size 36px desktop / 24px mobile (legible).",
+    "Animation registered: animation-name marquee-slide, duration 45s, iteration-count infinite; transform value changes over time (moves leftwards).",
+    "No horizontal overflow at 390 (documentElement.scrollWidth == 390, section overflow-x hidden).",
+    "Perf: 7 .cv-auto wrappers (Process/About/Trust/Testimonials/Blog/Faq/Contact) with computed content-visibility:auto; CSS rule '.cv-auto { content-visibility: auto; contain-intrinsic-size: 800px; }' present in stylesheet.",
+    "SmoothScroll gating: at 390 no 'lenis' class on <html> (native scroll); at 1440 html gets class 'lenis' (Lenis active). Note: only 'lenis' observed, not 'lenis-smooth' — cosmetic, Lenis is running.",
+    "Regressions: 8 blog cards render in home #blog section, blog post page /blog/:slug renders with correct h1, /services/:slug, /privacy and 404 route render, mobile menu opens, inner-page header contrast ok (rgba(255,255,255,.8) bg with rgb(17,24,39) text). Zero console errors on all tested routes.",
+    "Production build: CI=false GENERATE_SOURCEMAP=false yarn build -> exit 0, main JS 153.31 kB gzipped (<200KB), CSS 11.78 kB."
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Change @keyframes marquee-slide end state from translate3d(-100%,0,0) to translate3d(-50%,0,0) (dual-content pattern) — or apply the -100% animation to each .marquee-content instead of the track.",
+    "After the fix, re-verify visible coverage of .marquee-content over a full 45s cycle stays >= viewport width at all sampled times on both 1440 and 390."
+  ],
+  "critical_code_review_comments": [
+    "index.css: with two identical rows inside one flex track, -100% translation equals the full track (2x row) and guarantees an empty band for half the cycle. Percentage transforms resolve against the animated element's own width.",
+    "Marquee.jsx: second Row is aria-hidden (good), but consider aria-hidden on the whole decorative track since screen readers already get the section aria-label."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "85% (all checks pass except marquee continuity — the primary bug of this iteration)"},
+  "seed_data_creation": "None",
+  "should_call_test_agent_after_fix": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Measure marquee continuity by summing clipped widths of all .marquee-content rects against window.innerWidth at multiple timestamps across a full 45s cycle (sample every 2.5s). Coverage must never drop below viewport width. Everything else in iteration 11 (fonts, cv-auto, Lenis gating, routes, build) already verified passing.",
+  "rca_of_the_issue": "Percentage values in CSS transform translate resolve against the animated element's own box. .marquee-inner contains BOTH .marquee-content copies (4064px), so translating to -100% moves 4064px — twice the distance needed for a seamless loop with two copies. The correct end state for the dual-content pattern is -50%. Reproduced deterministically: visible marquee coverage decays from 1390px to 0px over ~18s on a 1440 viewport and from 351px to 0px on 390."
+}

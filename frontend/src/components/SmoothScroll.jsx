@@ -1,11 +1,18 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-// تمرير سلس عام باستخدام Lenis
+// تمرير سلس عبر Lenis — يُعطَّل على الأجهزة اللمسية لأداء أفضل
 export default function SmoothScroll({ children }) {
   useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouch =
+      window.matchMedia("(hover: none)").matches ||
+      window.matchMedia("(max-width: 1024px)").matches;
+
+    if (prefersReduced || isTouch) return;
+
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
@@ -18,7 +25,6 @@ export default function SmoothScroll({ children }) {
     }
     rafId = requestAnimationFrame(raf);
 
-    // تمرير سلس للروابط الداخلية
     const handleAnchor = (e) => {
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;

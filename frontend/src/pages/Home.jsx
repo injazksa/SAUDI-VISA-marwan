@@ -38,13 +38,13 @@ export default function Home() {
           <Hero />
           <EditorialMarquee />
           <Services />
-          <Process />
-          <About />
-          <Trust />
-          <Testimonials />
-          <Blog />
-          <Faq />
-          <Contact />
+          <div className="cv-auto"><Process /></div>
+          <div className="cv-auto"><About /></div>
+          <div className="cv-auto"><Trust /></div>
+          <div className="cv-auto"><Testimonials /></div>
+          <div className="cv-auto"><Blog /></div>
+          <div className="cv-auto"><Faq /></div>
+          <div className="cv-auto"><Contact /></div>
         </main>
         <Footer isHome />
         <FloatingContact />

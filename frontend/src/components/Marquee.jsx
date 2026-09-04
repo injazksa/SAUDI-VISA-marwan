@@ -1,31 +1,32 @@
 import { MARQUEE_ITEMS } from "@/lib/content";
 
-// شريط إخباري CSS خالص — حلقة لا نهائية سلسة بلا انقطاع
+// شريط إخباري متواصل — نمط قطعتَين متطابقتَين تُترجَمان -100% معاً
+// يضمن استمرارية بصرية بلا انقطاع على كل المتصفحات والشاشات
 export default function EditorialMarquee() {
-  // نكرّر مرتين: عند translateX(-50%) يحلّ النصف الثاني محلّ الأول تماماً
-  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+  const Row = ({ ariaHidden = false }) => (
+    <div className="marquee-content" aria-hidden={ariaHidden || undefined}>
+      {MARQUEE_ITEMS.map((item, i) => (
+        <span key={i} className="marquee-item">
+          <span className="font-body text-2xl md:text-4xl font-semibold text-brand tracking-tight">
+            {item}
+          </span>
+          <span className="text-brand-gold text-2xl md:text-3xl ms-6 me-0" aria-hidden="true">
+            •
+          </span>
+        </span>
+      ))}
+    </div>
+  );
 
   return (
     <section
-      className="py-10 md:py-14 bg-white border-y border-black/5"
+      className="marquee-section py-8 md:py-12 bg-white border-y border-black/5"
       data-testid="marquee-section"
-      aria-hidden="true"
+      aria-label="خدمات المكتب — شريط متحرك"
     >
-      <div className="marquee-viewport">
-        <div className="marquee-track" dir="ltr">
-          {items.map((item, i) => (
-            <span key={i} className="marquee-item">
-              <span
-                className={`font-heading text-4xl md:text-6xl font-bold px-8 ${
-                  i % 2 === 0 ? "text-brand" : "text-brand/30"
-                }`}
-              >
-                {item}
-              </span>
-              <span className="text-brand-gold text-3xl md:text-5xl">•</span>
-            </span>
-          ))}
-        </div>
+      <div className="marquee-inner" dir="ltr">
+        <Row />
+        <Row ariaHidden />
       </div>
     </section>
   );

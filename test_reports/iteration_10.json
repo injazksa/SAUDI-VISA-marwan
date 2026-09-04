@@ -1,0 +1,21 @@
+{
+  "summary": "Iteration 10 frontend-only verification. Homepage now renders EIGHT blog cards with correct data-testids and icon-only headers (0 <img> in each card). All 3 new routes (/blog/bachelor-degree-attestation, /blog/saudi-medical-check, /blog/domestic-workers-recruitment) render correct Arabic titles, 6 h2 body sections each, blogpost-cta, blogpost-back, 2 related posts, and inject BOTH Article + BreadcrumbList JSON-LD into <head> (medical-check keywords contain GAMCA/جيمكا). sitemap.xml served 200 with exactly 16 <loc> URLs including the 3 new saudivisajo.com blog URLs; llms.txt served with 8 blog article links (6 required present). Regression: 5 pre-existing blog posts, 4 service pages, 3 legal pages and 404 all render correct h1s; header nav is dark (rgba(1,59,30,0.8)) on inner pages and white (rgba(255,255,255,0.85)) on home hero; marquee track animating (x -6131 -> -6234); mobile menu opens via menu-open-btn and closes via menu-close-btn. Card click, related-post nav and back-to-blog nav all work. Zero console errors on every tested route. Production build exit 0 with build/_redirects present. No horizontal overflow at 1440/768/390.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Homepage blog grid (768px tablet)", "issues": ["Grid class is 'grid md:grid-cols-3' so at 768px it jumps straight to 3 columns (~230px wide cards) instead of the expected 2-column reflow. Suggest 'grid sm:grid-cols-2 lg:grid-cols-3' for a 3->2->1 progression. Cosmetic only, no overflow."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": ["Optional: change homepage blog grid to sm:grid-cols-2 lg:grid-cols-3 so tablet (768px) shows 2 columns instead of 3 narrow cards."],
+  "critical_code_review_comments": ["BlogPost.jsx injects JSON-LD client-side only; crawlers without JS execution (and the static build HTML) will not see Article/BreadcrumbList schema. Consider prerender/react-snap or static HTML injection if SEO schema pickup by non-JS crawlers matters.", "Article JSON-LD omits 'image' even though some BLOG entries have an image field; Google prefers an image property for Article rich results."],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100% (all requested checks passed)"},
+  "seed_data_creation": "None",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All iteration 10 checks pass. Only open item is the cosmetic 768px blog grid column count (md:grid-cols-3). Useful testids: blog-card-{slug}, blog-post-{slug}, blogpost-cta, blogpost-back, related-{slug}, menu-open-btn, menu-close-btn, mobile-menu, marquee-section + .marquee-track. Mobile menu overlay covers the open button, so always close with menu-close-btn.",
+  "rca_of_the_issue": "N/A - no functional defects found."
+}

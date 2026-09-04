@@ -51,6 +51,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://saudivisajo.com/blog/bachelor-degree-attestation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://saudivisajo.com/blog/saudi-medical-check</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://saudivisajo.com/blog/domestic-workers-recruitment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://saudivisajo.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
