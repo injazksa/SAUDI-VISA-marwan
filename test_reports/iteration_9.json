@@ -1,0 +1,23 @@
+{
+  "summary": "Iteration 9 frontend-only regression test of the Header contrast hot-fix. Verified header state on home (scroll 0 + scrolled) and on 8 inner routes, plus all iteration-8 features (blog cards, 2 new articles + JSON-LD, mailto links, sitemap, marquee, mobile menu) and responsive checks at 1440/768/390. Header contrast bug is FULLY RESOLVED; no regressions and zero console errors on any tested route.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "404 page (/xyz-not-real)", "issues": ["NotFound page renders standalone with NO site header (data-testid=site-header absent), so the review item 'header dark text on 404' is not applicable. Content is white-on-brand-ink and fully legible; flagged as informational only — consider whether a header/nav is desired on 404 for navigation consistency (a 'return home' CTA already exists)."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Header.jsx `onDark = isHome && !scrolled` is correct and minimal; no further change needed. Only caveat: if a future page ever uses a dark full-bleed hero behind the fixed header, the onDark flag will need to be prop-driven rather than isHome-driven."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified computed styles: HOME scrollY=0 -> header bg rgba(0,0,0,0) (transparent), nav-link color rgba(255,255,255,0.85), hero h1 rgb(255,255,255). HOME scrollY=600 -> bg rgba(255,255,255,0.8) + backdrop blur(24px), nav color rgba(1,59,30,0.8). All 8 inner routes (/blog/saudi-work-visa-guide, /blog/work-visa-fees, /blog/workforce-recruitment, /services/saudi-work-visa, /services/certificate-attestation, /privacy, /terms, /disclaimer) at scrollY=0 -> bg rgba(255,255,255,0.8)+blur(24px), nav rgba(1,59,30,0.8), logo rgb(17,24,39); mobile menu-open-btn on /privacy = rgb(1,59,30). Iteration-8 features: 5 blog cards, both new articles render h1 + JSON-LD [LocalBusiness, WebSite, FAQPage, Article, BreadcrumbList], contact-email-btn & footer-email = mailto:info@saudivisajo.com, sitemap.xml has exactly 13 <loc> all on saudivisajo.com, marquee-track animation 'marquee-slide' 45s active, mobile menu opens & closes. No horizontal overflow at 1440/768/390 on /, /blog/workforce-recruitment, /services/saudi-work-visa, /terms. Zero console/page errors.",
+  "rca_of_the_issue": "Original bug: header used onDark=!scrolled so inner pages (bg-paper background) rendered white text on a transparent header at scrollY=0. Fix scopes onDark to the home hero only and forces the white/80 glass background whenever not on the home hero. Confirmed by computed-style assertions on all affected routes."
+}

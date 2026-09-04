@@ -24,7 +24,7 @@ export default function Hero() {
       <motion.div className="absolute inset-0" style={{ scale: bgScale }}>
         <img
           src={HERO.image}
-          alt="مكتب المتخصصة — أعلام الأردن والسعودية"
+          alt="مكتب المتخصصون — أعلام الأردن والسعودية"
           className="w-full h-full object-cover"
           fetchPriority="high"
           decoding="async"

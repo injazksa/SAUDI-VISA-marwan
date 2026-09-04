@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, MessageCircle, MapPin, Clock, ArrowLeft } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock, Mail, ArrowLeft } from "lucide-react";
 import { MaskedLines } from "@/components/Reveal";
 import { CONTACT } from "@/lib/content";
 
@@ -65,6 +65,28 @@ export default function Contact() {
                   </div>
                   <div dir="ltr" className="text-sm text-white/70">
                     {CONTACT.phoneDisplay}
+                  </div>
+                </div>
+              </div>
+              <ArrowLeft
+                size={22}
+                className="group-hover:-translate-x-1 transition-transform duration-300"
+              />
+            </a>
+
+            <a
+              href={CONTACT.emailHref}
+              className="group flex items-center justify-between gap-4 border border-white/25 p-6 md:p-8 transition-all duration-300 hover:bg-white/10"
+              data-testid="contact-email-btn"
+            >
+              <div className="flex items-center gap-4">
+                <Mail size={28} className="text-brand-gold" />
+                <div>
+                  <div className="font-heading text-lg font-bold">
+                    راسلنا عبر البريد الإلكتروني
+                  </div>
+                  <div dir="ltr" className="text-sm text-white/70">
+                    {CONTACT.email}
                   </div>
                 </div>
               </div>

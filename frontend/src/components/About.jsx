@@ -22,7 +22,7 @@ export default function About() {
           </Reveal>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-brand-ink leading-tight">
             <MaskedLines
-              lines={["مكتب المتخصصة", "لإنجاز معاملات", "السفارة السعودية"]}
+              lines={["مكتب المتخصصون", "لإنجاز معاملات", "السفارة السعودية"]}
               lineClassName=""
             />
           </h2>

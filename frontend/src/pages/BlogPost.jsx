@@ -55,7 +55,7 @@ export default function BlogPost() {
       return () => {
         script.remove();
         bc.remove();
-        document.title = "مكتب المتخصصة لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
+        document.title = "مكتب المتخصصون لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
       };
     }
   }, [slug, post]);

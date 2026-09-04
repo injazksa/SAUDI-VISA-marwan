@@ -14,11 +14,11 @@ export default function LegalPage({ slug }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (data) {
-      document.title = `${data.title} | مكتب المتخصصة لإنجاز معاملات السفارة السعودية`;
+      document.title = `${data.title} | مكتب المتخصصون لإنجاز معاملات السفارة السعودية`;
     }
     return () => {
       document.title =
-        "مكتب المتخصصة لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
+        "مكتب المتخصصون لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
     };
   }, [slug, data]);
 

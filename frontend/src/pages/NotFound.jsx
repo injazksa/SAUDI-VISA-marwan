@@ -7,10 +7,10 @@ import { CONTACT } from "@/lib/content";
 
 export default function NotFound() {
   useEffect(() => {
-    document.title = "الصفحة غير موجودة (404) | مكتب المتخصصة";
+    document.title = "الصفحة غير موجودة (404) | مكتب المتخصصون";
     return () => {
       document.title =
-        "مكتب المتخصصة لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
+        "مكتب المتخصصون لإنجاز معاملات السفارة السعودية | معتمد ومرخص في الأردن";
     };
   }, []);
 

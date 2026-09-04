@@ -25,7 +25,7 @@ const NavLink = ({ item, isHome, onDark, onClick }) => {
 export default function Header({ isHome = true }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const onDark = !scrolled;
+  const onDark = isHome && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -38,7 +38,7 @@ export default function Header({ isHome = true }) {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled
+          scrolled || !isHome
             ? "bg-white/80 backdrop-blur-xl saturate-150 border-b border-black/5"
             : "bg-transparent"
         }`}

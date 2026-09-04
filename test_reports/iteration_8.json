@@ -1,0 +1,46 @@
+{
+  "summary": "Iteration 8 frontend-only regression pass on the Arabic RTL marketing site. Verified: (1) full 'المتخصصة' → 'المتخصصون' rename (0 occurrences in src/, public/, and in the rendered DOM of all 13 routes), (2) phone/WhatsApp/email contact data on all 10 testids, (3) new footer-email + contact-email-btn with mailto:info@saudivisajo.com, (4) 5 blog cards on home with icon-only headers (0 <img>, 3 <svg> each), (5) both new articles /blog/work-visa-fees and /blog/workforce-recruitment render title+sections+CTA+related+back link with Article JSON-LD, (6) sitemap.xml served 200 application/xml with exactly 13 saudivisajo.com URLs incl. both new blogs, (7) index.html canonical/og:image/LocalBusiness email on saudivisajo.com, (8) llms.txt + robots.txt updated, (9) production build exit 0 with all required artifacts, (10) zero console/page errors on all 13 routes, (11) no horizontal overflow at 1440/768/390, marquee animating (marquee-slide 45s, running, x moved -6062→-6163), mobile menu opens/closes/navigates, (12) netlify.toml + _redirects intact. ONE genuine defect found: white header text is invisible over the near-white bg-paper background on all 12 inner pages at scroll position 0.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Header (on inner pages: BlogPost / ServicePage / LegalPage / NotFound)",
+        "issue": "Invisible header nav + logo at initial page load (scrollY=0). Header is `bg-transparent` with `onDark = !scrolled` → nav links render `rgba(255,255,255,0.85)` and Logo renders `light`. But on inner pages `<main className='pt-[76px]'>` pushes the dark hero to y=76, so the element directly behind the 76px-tall fixed header is `div.bg-paper` = rgb(250,250,250). Result: white text on near-white background, contrast ratio ~1.05:1 (WCAG fail). Verified via elementsFromPoint: behind nav link = 'DIV.bg-paper min-h-screen bg=rgb(250,250,250)'; dark hero SECTION.bg-brand-ink starts at top=76. Home page is unaffected (hero image sits under the header). Affects all 5 blog articles, 4 service pages, 3 legal pages and 404. Header becomes readable only after scrolling >30px (switches to bg-white/80 + text-brand-ink).",
+        "selector": "[data-testid=\"site-header\"] nav a, [data-testid=\"site-header\"] a[aria-label=\"الرئيسية\"]",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "All inner pages (/blog/*, /services/*, /privacy, /terms, /disclaimer, 404) at scroll top",
+        "issues": [
+          "Header navigation links and logo wordmark are effectively invisible (white on rgb(250,250,250)) until the user scrolls. Suggested fix: pass isHome/onDark=false for non-home routes, or force the solid `bg-white/80 + text-brand-ink` header variant when isHome === false, or extend the dark hero behind the header instead of using main pt-[76px]."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix header contrast on inner pages: when isHome is false (or when the header overlays bg-paper), render the solid header variant (bg-white/80 + text-brand-ink + Logo light={false}) instead of the transparent/white-text variant, so nav links and the logo are legible at scroll position 0."
+  ],
+  "critical_code_review_comments": [
+    "Header.jsx derives `onDark = !scrolled` purely from scroll position and ignores the `isHome` prop it already receives. On inner pages the area behind the header is bg-paper (light), so the dark-mode styling is wrong at scrollY=0. `onDark` should be `isHome && !scrolled`.",
+    "The 76px header height is duplicated as a magic value in ServicePage.jsx:99, LegalPage.jsx:31 and BlogPost.jsx:82 (`pt-[76px]`) and again in Header.jsx (`h-[76px]`). Extract to a single constant / Tailwind theme token to avoid drift.",
+    "Positive: content is fully centralised in src/lib/content.js (CONTACT/BRAND/BLOG), so the rename, domain and email changes propagated consistently with no hardcoded leftovers — no DRY violations found for this iteration's changes."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A - frontend only testing requested",
+    "frontend": "92% (11/12 feature areas fully pass; 1 header contrast defect)"
+  },
+  "seed_data_creation": "None - static marketing site, no backend or data seeding required.",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "test_credentials": "None required (no auth in this app); /app/memory/test_credentials.md not needed.",
+  "context_for_next_testing_agent": "Iteration 8 verified end-to-end. Confirmed clean: rename to 'المتخصصون' (0 stale occurrences), phone +962 7 9262 2210 / tel:+962792622210 / wa.me/962792622210 on hero-whatsapp-btn, hero-phone-btn, header-whatsapp-btn, floating-whatsapp-btn, contact-whatsapp-btn, contact-phone-btn, footer-whatsapp, footer-phone; email testids footer-email and contact-email-btn both mailto:info@saudivisajo.com; 5 blog cards icon-only; both new articles render with Article+BreadcrumbList JSON-LD; sitemap 13 URLs all saudivisajo.com; build exit 0 with _redirects/index.html/gen/hero-1-office.webp/sitemap.xml/robots.txt/llms.txt present; netlify.toml base=frontend publish=build SPA redirect intact. ONLY open item: header white-on-white contrast on inner pages at scrollY=0 (Header.jsx onDark should honour isHome). After the fix, re-check /blog/work-visa-fees, /services/saudi-work-visa and /privacy at scroll position 0 and confirm nav link colour is dark (text-brand-ink) while the home page header stays white over the hero image.",
+  "rca_of_the_issue": "Root cause: Header.jsx computes `const onDark = !scrolled;` using only window.scrollY, even though the component already accepts an `isHome` prop. The header is `fixed` and `bg-transparent` when not scrolled. On the home page a dark hero image sits beneath the header so white text is legible, but BlogPost.jsx, ServicePage.jsx and LegalPage.jsx wrap their content in `<main className='pt-[76px]'>` inside a `div.bg-paper` container — that 76px padding is exactly the header height, so the dark hero section begins at y=76 and the light bg-paper (rgb(250,250,250)) is what renders behind the header. White text (rgba(255,255,255,0.85)) over rgb(250,250,250) yields ~1.05:1 contrast, making nav links and the logo wordmark invisible. Reproduction: open https://saudi-services-hub-2.preview.emergentagent.com/blog/work-visa-fees without scrolling and inspect the header. Mitigation: change to `const onDark = isHome && !scrolled;` (and pass Logo light={onDark}), or make the inner-page heroes extend behind the fixed header instead of offsetting with pt-[76px]."
+}

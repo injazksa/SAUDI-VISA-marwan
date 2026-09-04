@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Mail } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 import { NAV, CONTACT, BRAND } from "@/lib/content";
 
@@ -77,11 +77,19 @@ export default function Footer({ isHome = true }) {
             </a>
             <a
               href={CONTACT.phoneHref}
-              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors mb-8"
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors mb-3"
               data-testid="footer-phone"
             >
               <Phone size={18} className="text-brand-gold" />
               <span dir="ltr">{CONTACT.phoneDisplay}</span>
+            </a>
+            <a
+              href={CONTACT.emailHref}
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors mb-8"
+              data-testid="footer-email"
+            >
+              <Mail size={18} className="text-brand-gold" />
+              <span dir="ltr">{CONTACT.email}</span>
             </a>
 
             <div className="text-brand-gold text-sm font-bold tracking-wider mb-4">

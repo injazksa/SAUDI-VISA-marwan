@@ -1,57 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/</loc>
+    <loc>https://saudivisajo.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/services/saudi-work-visa</loc>
+    <loc>https://saudivisajo.com/services/saudi-work-visa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/services/certificate-attestation</loc>
+    <loc>https://saudivisajo.com/services/certificate-attestation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/services/professional-verification-qvp</loc>
+    <loc>https://saudivisajo.com/services/professional-verification-qvp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/services/corporate-services</loc>
+    <loc>https://saudivisajo.com/services/corporate-services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/blog/saudi-work-visa-guide</loc>
+    <loc>https://saudivisajo.com/blog/saudi-work-visa-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/blog/certificate-attestation-guide</loc>
+    <loc>https://saudivisajo.com/blog/certificate-attestation-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/blog/power-of-attorney-eauth</loc>
+    <loc>https://saudivisajo.com/blog/power-of-attorney-eauth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/privacy</loc>
+    <loc>https://saudivisajo.com/blog/work-visa-fees</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://saudivisajo.com/blog/workforce-recruitment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://saudivisajo.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/terms</loc>
+    <loc>https://saudivisajo.com/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://saudi-services-hub-2.preview.emergentagent.com/disclaimer</loc>
+    <loc>https://saudivisajo.com/disclaimer</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
