@@ -1,0 +1,27 @@
+{
+  "summary": "Frontend-only verification for iteration 15. FAQ[0] updated correctly: question is 'ما طبيعة عمل المكتب؟' and answer contains the neutral phrase 'جهة خدمات مستقلة وليس جهة حكومية' with no 'معتمد ومرخّص' inside the FAQ answer. No regressions: Home loads, BackToTop works (scroll returned to top area), and all requested routes (/services/istiqdam-manzili, /blog/dalil-istiqdam, /privacy, /terms, /disclaimer, 404) render with zero console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Site-wide (non-FAQ)", "issues": ["Phrase 'معتمد ومرخّص' / 'مرخّص ومعتمد' still appears outside FAQ: src/lib/legal.js:54 (disclaimer body), src/lib/content.js:149 (feature card 'مكتب مرخّص ومعتمد'), src/lib/content.js:268 (service copy 'ربطنا كمكتب معتمد'), and in <title> tags of NotFound/LegalPage/ServicePage/BlogPost. If the goal is full wording unification across the site (not only FAQ), these should also be revisited. For this iteration scope (FAQ only) the task is complete."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional (out of iteration-15 scope): consider removing/softening 'معتمد ومرخّص' claims in legal.js disclaimer, feature card 'مكتب مرخّص ومعتمد', service copy, and page <title>s for consistency with the new neutral FAQ wording."
+  ],
+  "critical_code_review_comments": [
+    "FAQ[0] answer correctly rendered via faq-answer-0 testid after expansion; collapse behavior and testids are intact.",
+    "No console errors across tested routes.",
+    "Wording claim 'معتمد ومرخّص' remains in multiple other locations — potential inconsistency with the new neutral stance."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iteration 15 was a one-line FAQ copy change in src/lib/content.js (FAQ[0]). Verified via Playwright: question text matches, answer expands with neutral phrase, no 'معتمد ومرخّص' in FAQ answer. Other site locations still contain 'معتمد ومرخّص' – flagged for optional follow-up but outside this iteration's scope. All routes load without console errors; BackToTop works.",
+  "rca of the issue": "N/A — copy-only change, verified pass."
+}
