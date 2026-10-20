@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 13 — Full browser-based marquee continuity validation + regression spot checks. Marquee fix (direction:ltr + position:relative on .marquee-section) is CONFIRMED WORKING. Desktop 1440x900: 19/19 samples effectively PASS (one sample reported coverage=1439.99993... vs 1440 — a sub-pixel floating-point rounding artifact, visually full coverage). Mobile 390x844: 19/19 samples PASS. Computed style verified: direction=ltr (not inherited rtl), position=relative, overflow=hidden, .marquee-inner offsetLeft=0 (bug of -2624 is gone). 2 .marquee-content elements present. All 8 regression spot-checks PASS. Zero console errors. One remaining non-blocking Lenis warning (see below).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Marquee desktop @ t=12.5s sample 6/19", "issues": ["Union coverage computed as 1439.99993896484 vs viewport 1440 — sub-pixel floating-point rounding on getBoundingClientRect edges. Visually full coverage, two rects abut at x=1352 with widths 2032 each spanning -680→1352→3384. Not a real gap."]},
+      {"screen": "Home (both viewports)", "issues": ["Lenis still logs: 'Please ensure that the container has a non-static position, like relative, fixed, or absolute to ensure scroll offset is calculated correctly.' The problem statement expected this warning to disappear after making .marquee-section position:relative, but it still fires on page load. The warning likely refers to a different Lenis-tracked container (e.g., lenis wrapper/content element), not .marquee-section. Non-blocking (warning, not error) but worth E1 investigating which element Lenis is complaining about."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional / cosmetic) Investigate the remaining Lenis 'non-static position' warning — identify which container Lenis is tracking that is still position:static and set it to position:relative. Likely the Lenis wrapper/content root, not .marquee-section.",
+    "(Nice to have) The desktop sample-6 'fail' is a sub-pixel float artifact. If a strict >=1440 assertion is required, consider slightly overlapping the two .marquee-content rows (e.g., -1px margin) OR applying Math.floor() when measuring. No functional change required."
+  ],
+  "critical_code_review_comments": [
+    "Marquee implementation (dual .marquee-content + translate3d(-50%) keyframe + direction:ltr override on section) is correct and the fix is sound.",
+    "Lenis warning should be silenced for production polish — current implementation leaves one warning on every home load."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "Marquee desktop 18/19 strict (19/19 effective, sub-pixel), mobile 19/19. Regression 8/8 (blog cards=8, /blog/saudi-work-visa-guide 200, /services/saudi-work-visa 200, /privacy 200, /xyz-404 renders NotFound, mobile menu opens, all wa.me links=962792622210, all tel: links=+962792622210, footer-email+contact-email-btn both mailto:info@saudivisajo.com). Zero console errors."},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Marquee continuity fix (iteration 13) is validated via live browser automation at 1440x900 and 390x844 with 19 samples across a full 45s cycle. Only outstanding items are the Lenis warning (expected to be gone but still fires) and a sub-pixel float rounding at one sample. Both are cosmetic/non-blocking. Preview URL: https://saudi-services-hub-2.preview.emergentagent.com .",
+  "rca of the issue": "Earlier iterations observed empty marquee because the parent <body dir='rtl'> caused the inline-flex .marquee-inner to be laid out starting from the right edge, producing a huge negative offsetLeft (~-2624) that pushed both .marquee-content rows outside the viewport. Fix: forcing .marquee-section { direction: ltr; position: relative; } re-anchors the inner flex layout at x=0 (confirmed: innerOffsetLeft=0 now) and gives Lenis a non-static container. Combined with the dual-row + translate3d(-50%) keyframe this yields seamless coverage."
+}
