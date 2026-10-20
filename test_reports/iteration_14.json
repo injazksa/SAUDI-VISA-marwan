@@ -1,0 +1,20 @@
+{
+  "summary": "Iteration 14 frontend verification — content purification + BackToTop feature. All acceptance criteria verified via Playwright on desktop (1440) and mobile (390): nav has no testimonials link, no testimonials-section, hero-pillars present with the 3 required labels (hero-stats removed), no '+10'/'+5000'/'100%' anywhere on page, marquee has all 8 required phrases × 2 rows = 16 .marquee-item elements on both desktop and mobile, no 'معتمد ومرخّص' in Hero or Marquee, About contains 'لا يوفّر عقود عمل أو وظائف' and 'ليس جهة حكومية' (and no 'مرخّص ومعتمد ومفوَّض'), BackToTop button starts hidden (opacity-0 pointer-events-none), becomes opacity-100 after >600px scroll, click returns scrollY to 0, no overlap with FloatingContact (BTT end-6 right / FC start-6 left RTL) at 1440 or 390. All subpages (/services/work-visa, /blog/, /privacy, /terms, /disclaimer) return 200 and 404 route renders. Production build succeeds (exit 0, _redirects + index.html + sitemap.xml generated). Zero page/console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "FAQ content.js line 331 still contains the claim 'نعم، «المتخصصون» مكتب معتمد ومرخّص لإنجاز المعاملات لدى السفارة السعودية في الأردن' — the user's purification request stated 'لا ادعاء معتمد ومرخص بدون إثبات'. Hero/Marquee/About were cleaned, but this FAQ answer still asserts official licensing. Recommend softening (e.g., 'مكتب متخصّص بإنجاز معاملات السفارة السعودية في الأردن') for full consistency with the iteration-14 content purification goal. Non-blocking per the test spec which permits legacy mentions outside Hero/Marquee, but worth flagging."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "iteration 14 fully verified. Only remaining 'معتمد ومرخّص' reference left is in FAQ answer (content.js line 331). Marquee fix from iter 13 (direction:ltr + -50% keyframe) still working: 16 items on both 1440 and 390."
+}
