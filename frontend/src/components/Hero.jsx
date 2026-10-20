@@ -92,15 +92,14 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 0.9 }}
-          className="mt-16 flex flex-wrap gap-10 md:gap-16"
-          data-testid="hero-stats"
+          className="mt-16 flex flex-wrap gap-x-10 gap-y-4 md:gap-x-16"
+          data-testid="hero-pillars"
         >
-          {HERO.stats.map((st) => (
-            <div key={st.label} className="border-t border-white/20 pt-4">
-              <div className="font-heading text-3xl md:text-4xl font-bold text-white">
-                {st.value}
+          {HERO.pillars.map((p) => (
+            <div key={p.label} className="border-t border-white/20 pt-4">
+              <div className="font-heading text-xl md:text-2xl font-medium text-white">
+                {p.label}
               </div>
-              <div className="text-white/60 text-sm mt-1">{st.label}</div>
             </div>
           ))}
         </motion.div>

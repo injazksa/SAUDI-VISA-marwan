@@ -8,12 +8,12 @@ import Services from "@/components/Services";
 import Process from "@/components/Process";
 import Trust from "@/components/Trust";
 import About from "@/components/About";
-import Testimonials from "@/components/Testimonials";
 import Blog from "@/components/Blog";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   const location = useLocation();
@@ -41,13 +41,13 @@ export default function Home() {
           <div className="cv-auto"><Process /></div>
           <div className="cv-auto"><About /></div>
           <div className="cv-auto"><Trust /></div>
-          <div className="cv-auto"><Testimonials /></div>
           <div className="cv-auto"><Blog /></div>
           <div className="cv-auto"><Faq /></div>
           <div className="cv-auto"><Contact /></div>
         </main>
         <Footer isHome />
         <FloatingContact />
+        <BackToTop />
       </div>
     </SmoothScroll>
   );
