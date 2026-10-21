@@ -1,0 +1,28 @@
+{
+  "summary": "Comprehensive frontend testing of new Arabic/RTL content and page restructure. 69/70 checks passed. Verified: Hero gold accreditation badge, new section order (hero→about→accreditation→services→process→blog→faq→contact), accreditation card with 4 trust-items, 7-item nav (no contact), textual process steps (الخطوة الأولى..الرابعة) with no 01-04 decorative numbers, FAQ with 14 questions where #3 and #6 render bullet lists (6 and 4 items respectively), all contact buttons (hero-whatsapp/phone wa.me/962792622210, tel:+962792622210), footer accreditation line. Service pages: /services/saudi-work-visa has breadcrumbs + service-accreditation-badge + 5 service-steps + steps-note linking to /blog/saudi-medical-check + internal links to attestation and QVP. /services/certificate-attestation has service-note (yellow), 4 doc-groups, 4 steps, 3 features, article-summary (green باختصار), service FAQ (6 Qs) toggling correctly. /services/professional-verification-qvp has 2 compare-cards (with أمديست), 4 steps, block-cta-whatsapp, 5 FAQ. /services/corporate-services loads with accreditation badge. All blog pages (saudi-work-visa-guide, saudi-medical-check), legal pages (/privacy, /terms, /disclaimer), and 404 render correctly. Mobile @375px: no horizontal scroll, menu-open-btn works, drawer opens with 7 nav items.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ServicePage article (certificate-attestation)", "issue": "Review request requires 6 article sections (article-section-0..5) but services.js provides only 5 sections (article-section-0..4). The 6th section is missing. Likely the intent was to split one of the existing sections or add a new one (e.g., a separate 'الأخطاء الشائعة' section with yellow box). Current content still contains the mistakes list under section 4 (variant: 'mistakes'), so visually ok but testids 0..5 count fails.", "selector": "[data-testid='article-section-5']", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Mobile side drawer", "issues": ["Last two nav links (المدونة, الأسئلة الشائعة) appear with very low opacity/faded color on dark green background — contrast is poor. Likely a hover/text-muted style applied inadvertently."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Add a 6th article section to SERVICE_DETAILS['certificate-attestation'].blocks article.sections array so that data-testid='article-section-5' exists (per spec).",
+    "Investigate low-contrast on last items of mobile drawer nav — ensure all 7 links use the same solid light color."
+  ],
+  "critical_code_review_comments": [
+    "services.js is approaching large size; consider splitting per-service into separate modules under src/lib/services/ for maintainability.",
+    "FAQ list rendering ties data-testid 'faq-question-N' to Home FAQ and 'service-faq-question-N' to service pages — consistent and good."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "98.5% (69/70)"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iteration 17: all new content + restructure verified. One minor content gap: certificate-attestation article has 5 sections, spec requested 6. Mobile drawer has a minor low-contrast issue on last 2 nav items. Everything else green — nav links, badges, section order, breadcrumbs, service blocks (steps/docGroups/compare/features/article/faq/cta/note), 14 home FAQs with list variants, 8 blog + 3 legal + 404 all load, mobile 375px clean."
+}
