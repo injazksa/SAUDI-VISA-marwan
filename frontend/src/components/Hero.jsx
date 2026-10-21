@@ -59,7 +59,7 @@ export default function Hero() {
           {HERO.overline}
         </motion.p>
 
-        <h1 className="font-heading font-light text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tight max-w-5xl">
+        <h1 className="font-heading font-light text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.3] tracking-tight max-w-5xl">
           <MaskedLines lines={HERO.titleLines} startDelay={0.35} />
         </h1>
 
