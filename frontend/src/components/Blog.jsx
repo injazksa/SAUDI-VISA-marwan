@@ -37,9 +37,6 @@ export default function Blog() {
                     <div className="absolute inset-0 opacity-[0.06]">
                       <div className="noise-overlay" />
                     </div>
-                    <div className="absolute -top-6 -end-6 font-heading text-[9rem] font-black text-white/[0.05] leading-none pointer-events-none">
-                      0{i + 1}
-                    </div>
                     {Icon && (
                       <Icon
                         size={72}

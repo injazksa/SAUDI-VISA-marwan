@@ -1,147 +1,222 @@
 {
-  "theme_strategy": {
-    "primary_theme": "light",
-    "description": "Editorial Luxury & Trust. An Awwwards-level, premium marketing site for an accredited Saudi embassy services office. Relies on heavy negative space, refined typography, and purposeful motion. Avoids generic corporate templates by using stark contrasts, oversized typography, and intentional asymmetry.",
-    "colors": {
-      "brand_primary": "#006C35",
-      "brand_primary_dark": "#024D26",
-      "brand_accent_gold": "#C5A059",
-      "background_light": "#FAFAFA",
-      "surface_light": "#FFFFFF",
-      "surface_green": "#013B1E",
-      "text_primary_dark": "#111827",
-      "text_secondary_dark": "#4B5563",
-      "text_primary_light": "#F9FAFB",
-      "border_subtle": "rgba(0, 0, 0, 0.08)",
-      "border_green_subtle": "rgba(0, 108, 53, 0.2)"
-    },
-    "forbidden_colors": ["#1B93A4", "#7351B7", "#000000"]
+  "brand_identity": {
+    "name": "المتخصصون - مكتب إنجاز معاملات السفارة السعودية في الأردن",
+    "positioning": "مكتب مرخص ومعتمد رسميًا من السفارة السعودية في المملكة الأردنية الهاشمية لإنجاز معاملات تأشيرات العمل، تصديق الشهادات والوثائق الرسمية، والاعتماد المهني (QVP).",
+    "value_proposition": "إنجاز احترافي معتمد، استشارات دقيقة، ومتابعة متكاملة للمعاملات دون تقديم وعود وهمية أو توفير عقود عمل.",
+    "investment_level": "مستوى تصميم وتنفيذ فاخر يطابق المواقع العالمية ذات الميزانية العالية ($5,000–$10,000)، بإخراج بصري إديتوريال متناوب بين الأسطح الداكنة والبيضاء."
   },
   "typography": {
-    "font_families": {
-      "headings": "'Alexandria', sans-serif",
-      "body": "'IBM Plex Sans Arabic', sans-serif",
-      "numerals": "'Alexandria', sans-serif"
+    "heading_font": {
+      "family": "Alexandria, sans-serif",
+      "weights": ["font-semibold (600)", "font-bold (700)", "font-extrabold (800)"],
+      "usage": "جميع العناوين الرئيسية والفرعية وعناوين البطاقات (H1, H2, H3, H4)."
+    },
+    "body_font": {
+      "family": "IBM Plex Sans Arabic, sans-serif",
+      "weights": ["font-normal (400)", "font-medium (500)", "font-semibold (600)"],
+      "usage": "جميع النصوص المتن، الفقرات الشارحة، الجداول، البطاقات، والقوائم."
     },
     "hierarchy": {
-      "h1": "text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1]",
-      "h2": "text-4xl md:text-5xl font-medium tracking-tight leading-tight",
-      "h3": "text-2xl md:text-3xl font-medium leading-snug",
-      "body_lg": "text-lg md:text-xl font-light leading-relaxed text-gray-600",
-      "body": "text-base font-normal leading-relaxed text-gray-600",
-      "overline": "text-xs md:text-sm font-bold tracking-[0.15em] uppercase text-brand_primary",
-      "massive_number": "text-7xl md:text-9xl font-black opacity-10"
-    },
-    "rtl_guidelines": "The entire application MUST have dir=\"rtl\" on the HTML tag. Use Tailwind logical properties (e.g., ps-, pe-, ms-, me-, text-start, text-end, border-s, border-e) instead of pl-, pr-, ml-, mr-, text-left, text-right to ensure flawless RTL rendering."
-  },
-  "layout_and_spacing": {
-    "container": "max-w-[1400px] mx-auto px-6 md:px-12",
-    "section_padding": "py-20 md:py-32 lg:py-40",
-    "grid_system": "Use The Swiss Grid and Bento asymmetric variations. Avoid default equal-width columns. Favor 12-column grids where content spans 5-7 columns leaving massive negative space on the opposite side.",
-    "borders": "Use 1px borders (border-border_subtle) to create structural 'architectural' lines in the design. Cards should have no shadow, only crisp 1px borders."
-  },
-  "motion_and_interactions": {
-    "libraries": ["framer-motion", "lenis", "react-fast-marquee"],
-    "hero_reveal": "Kinetic line-by-line masked reveal. Wrap each line of the H1 in a hidden overflow span, and translate Y from 100% to 0% over 1s with a custom cubic-bezier(0.76, 0, 0.24, 1).",
-    "scroll_behavior": "Implement Lenis for smooth momentum scrolling globally.",
-    "hover_states": "Interactive elements should not just change color. Images should slightly scale up (scale-105) within a clipped overflow-hidden wrapper. Buttons should feature an arrow that translates horizontally.",
-    "marquee": "Use react-fast-marquee for an editorial ribbon. Slow speed (speed=30). Text should be oversized, outline style (text-transparent webkit-text-stroke-1 webkit-text-stroke-brand_primary) alternating with solid text."
-  },
-  "component_specs": {
-    "header": {
-      "style": "Glassmorphism. backdrop-blur-xl bg-white/70. Fixed top. z-50. Border bottom 1px solid rgba(0,0,0,0.05).",
-      "layout": "Logo on the start (right in RTL), navigation links in center, Contact CTA (WhatsApp icon + number) on the end (left in RTL)."
-    },
-    "buttons": {
-      "primary": "bg-brand_primary text-white rounded-none px-8 py-4 text-sm font-medium hover:bg-brand_primary_dark transition-colors duration-300 flex items-center gap-3",
-      "secondary": "bg-transparent border border-brand_primary text-brand_primary rounded-none px-8 py-4 text-sm font-medium hover:bg-brand_primary/5 transition-colors duration-300 flex items-center gap-3"
-    },
-    "cards": {
-      "service_card": "p-8 md:p-12 border border-border_subtle bg-white hover:border-brand_primary transition-colors duration-500 group flex flex-col justify-between h-full min-h-[300px]",
-      "step_card": "relative p-8 border-t border-border_subtle. Massive background numeral. Clear, concise step description."
-    },
-    "accordion_faq": {
-      "style": "Minimalist. border-b border-border_subtle py-6. Question text is text-2xl font-light. Plus/Minus icon interaction."
+      "h1_hero": "text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug tracking-tight",
+      "h3_subsection": "text-xl sm:text-2xl font-bold leading-snug",
+      "h4_card": "text-lg sm:text-xl font-semibold leading-normal",
+      "body_large": "text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300",
+      "body_regular": "text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-400",
+      "overline_badge": "text-xs font-bold tracking-[0.2em] uppercase text-brand-gold",
+      "arabic_numbers": "تُستخدم الأرقام الإنجليزية (0-9) فقط داخل النصوص والجدول والأرقام الهاتفية لتجنب اللبس في المواصفات والمعاملات."
     }
   },
-  "page_sections_blueprint": [
-    {
-      "name": "Hero Section",
-      "features": "Split layout or full-screen overlay. Kinetic text reveal of 'مكتب المتخصصة لإنجاز معاملات السفارة السعودية'. Image slider transitioning between abstract emerald textures and Riyadh skyline. Overlaid with subtle noise texture. Scroll down indicator."
+  "colors": {
+    "primary": {
+      "brand_green": "#006C35",
+      "brand_dark": "#024D26",
+      "brand_ink": "#013B1E"
     },
-    {
-      "name": "Editorial Marquee",
-      "features": "Infinite slow scrolling text: 'مكتب معتمد ومرخص للسفارة السعودية في الأردن • السرعة • الموثوقية • الإنجاز •'."
+    "accent": {
+      "brand_gold": "#C5A059",
+      "brand_gold_light": "#DFBE82",
+      "brand_gold_muted": "rgba(197, 160, 89, 0.15)"
     },
-    {
-      "name": "Services (Our Expertise)",
-      "features": "Bento grid or asymmetrical list revealing services: تأشيرات العمل, تصديق الوثائق, الاعتماد المهني, خدمات الشركات. Use high-contrast hover effects."
+    "neutrals": {
+      "paper_light": "#FAFAFA",
+      "surface_white": "#FFFFFF",
+      "border_light": "rgba(0, 108, 53, 0.12)",
+      "border_dark": "rgba(197, 160, 89, 0.2)",
+      "text_main": "#111827",
+      "text_muted": "#4B5563"
     },
-    {
-      "name": "Process (How We Work / Manifesto)",
-      "features": "Numbered chapters (01, 02, 03) detailing the frictionless process. Large typography, structural lines."
+    "semantic": {
+      "info_bg": "#F0FDF4",
+      "info_border": "#86EFAC",
+      "info_text": "#166534",
+      "warning_bg": "#FEFCE8",
+      "warning_border": "#FDE047",
+      "warning_text": "#854D0E"
     },
-    {
-      "name": "Trust & Accreditation (Why Us)",
-      "features": "Spotlight on official stamps, documents, and accreditation. Highlighting speed and flawlessness."
-    },
-    {
-      "name": "FAQ",
-      "features": "Clean accordion for common questions."
-    },
-    {
-      "name": "Contact & Footer",
-      "features": "Massive typography 'تواصل معنا'. Direct Phone and WhatsApp CTAs. Address: 1st Circle - Jabal Amman. Hours: Sun-Thu 9AM-4PM. Links to Legal Pages (Privacy Policy, Terms of Use)."
+    "contrast_rules": {
+      "text_on_dark": "أبيض ناصع #FFFFFF أو ذهبي #DFBE82 مع نسبة تباين لا تقل عن 7:1",
+      "text_on_light": "أخضر حبري #013B1E أو رمادي داكن #111827",
+      "hover_contrast": "يجب تحديد لون النص صراحةً عند التمرير (مثال: hover:bg-brand-dark hover:text-white)"
     }
-  ],
-  "image_assets": {
-    "hero_slider": [
-      {
-        "url": "https://images.unsplash.com/photo-1694018359679-49465b4c0d61?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwxfHxzYXVkaSUyMGFyYWJpYSUyMHJpeWFkaCUyMG1vZGVybiUyMGFyY2hpdGVjdHVyZSUyMHNreWxpbmV8ZW58MHx8fHwxNzg1ODgwMDk4fDA&ixlib=rb-4.1.0&q=85",
-        "description": "Riyadh modern skyline (Kingdom Centre)",
-        "category": "hero"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1590018363780-f0d10b4fc043?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBhYnN0cmFjdCUyMGVsZWdhbnQlMjBlbWVyYWxkJTIwZ3JlZW4lMjB0ZXh0dXJlfGVufDB8fHxncmVlbnwxNzg1ODgwMDgwfDA&ixlib=rb-4.1.0&q=85",
-        "description": "Abstract emerald green fluid texture",
-        "category": "hero_abstract"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1604157886233-08985afc49e9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwzfHxBbW1hbiUyMEpvcmRhbiUyMGNpdHlzY2FwZSUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3ODU4ODAwODB8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Amman Jordan cityscape",
-        "category": "location_context"
-      }
+  },
+  "visual_enhancers": {
+    "noise_overlay": "طبقة نسيج ناعمة opacity-5 pointer-events-none لإضفاء لمسة ورقية فخمة تمنع التسطح الرقمي",
+    "glassmorphic_nav": "bg-brand-ink/80 backdrop-blur-xl border-b border-brand-gold/20 shadow-2xl",
+    "asymmetric_cards": "تنويع أشكال وشبكات بطاقات الخدمات (بطاقة رئيسية كبرى بظل ذهبي، بطاقة طويلة مع قائمة متميزة، وبطاقتان متوازنتان)",
+    "tracing_beam": "حدود مضيئة ناعمة بأسلوب تحويم متدرج للبطاقات المهمة دون المبالغة أو تسريع الحركة",
+    "grid_borders": "خطوط شبكية دقيقة border-brand-green/10 تفصل الأقسام لمنح المظهر الهندسي الاحترافي"
+  },
+  "layout_and_sections_order": {
+    "home_page_sequence": [
+      "1. Header (Navigation & Urgent Phone CTA)",
+      "2. Hero Section (Official Saudi Green background, badges, key values, CTA)",
+      "3. About Us / من نحن (مبكراً كعنصر ثقة أساسي)",
+      "4. Trust & Accreditation / قسم الترخيص والاعتماد الرسمي من السفارة السعودية",
+      "5. Services Section / بطاقات الخدمات الأربع المتنوعة بصرياً",
+      "6. Process / خطوات كيف نعمل بصيغة نصية واضحة (الخطوة الأولى...)",
+      "7. Blog & Guides / المدونة والتعليمات (8 مقالات متكاملة)",
+      "8. FAQ / الأسئلة الشائعة (أكورديون مفصل)",
+      "9. Contact & Location / قسم التواصل والعنوان الرسمي",
+      "10. Footer / التذييل الفاخر مع روابك التصفح وإخلاء المسؤولية"
     ],
-    "trust_documents": [
-      {
-        "url": "https://images.unsplash.com/photo-1774891937400-b5e32f719fae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkb2N1bWVudCUyMHNpZ25hdHVyZSUyMHN0YW1wJTIwY2xvc2UlMjB1cHxlbnwwfHx8fDE3ODU4ODAwODB8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Professional wooden stamp on desk",
-        "category": "accreditation"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1774891937497-96df6a794bd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBkb2N1bWVudCUyMHNpZ25hdHVyZSUyMHN0YW1wJTIwY2xvc2UlMjB1cHxlbnwwfHx8fDE3ODU4ODAwODB8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Wax seal stamp",
-        "category": "official_documents"
-      }
+    "service_detail_page_sequence": [
+      "1. Sticky Glass Header",
+      "2. Breadcrumb Navigation (الرئيسية / الخدمات / اسم الخدمة)",
+      "3. Service Hero with Official Accreditation Badge & Direct WhatsApp CTA",
+      "4. Key Highlights / مميزات ومتطلبات الخدمة الأساسية",
+      "5. Detailed Step-by-Step Procedure Guide (سلسلة الإجراءات المحطات 1-5)",
+      "6. Document Classification & Categories (أربع مجموعات وثائق منسقة)",
+      "7. Accreditation Types Comparison Table (جدول مقارنة الفحص vs التحقق لخدمة QVP)",
+      "8. Common Mistakes & Important Warnings (صناديق تنبيه وتوجيهات رسمية)",
+      "9. Service Specific FAQ Accordion",
+      "10. Bottom Conversion CTA (تواصل مباشر عبر الواتساب مع المستشار المختص)"
     ]
   },
-  "testing": {
-    "attributes": "All interactive elements, buttons, accordion toggles, and navigation links MUST include a 'data-testid' attribute (e.g., data-testid='nav-contact-button', data-testid='faq-accordion-item-1')."
+  "components": {
+    "Header": {
+      "type": "Sticky Glassmorphism RTL Bar",
+      "background": "bg-brand-ink/90 backdrop-blur-lg border-b border-brand-gold/20 z-50",
+      "elements": [
+        "شعار المكتب الرسمي (SVG مخصص للعلامة التجارية)",
+        "روابط التنقل الرئيسية (الرئيسية، من نحن، اعتماد السفارة، الخدمات، كيف نعمل، المدونة، الأسئلة الشائعة)",
+        "زر التواصل المباشر السريع (رقم الهاتف +962 7 9262 2210 / واتساب)"
+      ]
+    },
+    "Hero": {
+      "type": "Full-width Editorial Split",
+      "theme": "Dark Brand Ink (#013B1E) with subtle gold accents and real architectural photography background",
+      "features": [
+        "بادج ذهبي متلألئ: 'مكتب مرخص ومعتمد من السفارة السعودية في الأردن'",
+        "عنوان متمتع بالتسلسل الهرمي البصري الممتاز مع نص ختامي مؤكد على أن الخدمة إنجاز معاملات وليست توفير وظائف",
+        "أزرار تفاعلية: 'استشارة فورية عبر الواتساب' و'استعراض الخدمات المعتمدة'"
+      ]
+    },
+    "Marquee": {
+      "type": "Pure CSS Seamless Dual-Content Infinite Ticker",
+      "styling": "border-y border-brand-gold/20 bg-brand-dark py-4 text-brand-gold font-bold tracking-widest text-sm uppercase",
+      "rule": "ممنوع استخدام مكتبات خارجية للشريط المتحرك، مع مراعاة اتجاه RTL وسلاسة الحركة بدون Pause على الماوس إذا تطلب الأمر"
+    },
+    "ServiceCards": {
+      "type": "Asymmetric Bento Grid System (4 Core Services)",
+      "layout": "grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8",
+      "services": [
+        {
+          "slug": "work-visas",
+          "title": "معاملات تأشيرات العمل السعودية",
+          "span": "lg:col-span-7",
+          "design_style": "Hero Bento Card مع خلفية داكنة متدرجة وإبراز خطوات الاعتماد"
+        },
+        {
+          "slug": "attestation",
+          "title": "تصديق الشهادات والوثائق الرسمية",
+          "span": "lg:col-span-5",
+          "design_style": "High-Density Checklist Card مع إبراز محطات التصديق من وزارة الخارجية إلى السفارة"
+        },
+        {
+          "slug": "qvp",
+          "title": "الاعتماد المهني وتوثيق المؤهلات (QVP)",
+          "span": "lg:col-span-5",
+          "design_style": "Comparison Focus Card مع تفنيد مساري الفحص والتحقق"
+        },
+        {
+          "slug": "corporate-services",
+          "title": "خدمات الشركات والقطاع المؤسسي",
+          "span": "lg:col-span-7",
+          "design_style": "Institutional Elegance Card مع حلول الربط المباشر وإدارة الملفات الضخمة"
+        }
+      ]
+    },
+    "TrustSection": {
+      "type": "Official Accreditation Certificate Card",
+      "background": "bg-white border-2 border-brand-gold/30 shadow-xl rounded-none p-8 md:p-12 text-center",
+      "content": "بيان الاعتماد الرسمي والتأكيد على الدور التنفيذي للمكتب المعتمد لدى السفارة السعودية بعمان دون الادعاء بضمان القبول أو استخدام أرقام تراخيص وهمية."
+    },
+    "BlogCards": {
+      "type": "Editorial Cards",
+      "grid": "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+      "style": "Clean white background, hover zoom image effect, subtle gold category pill badge, and clear read-time metadata"
+    },
+    "FAQAccordion": {
+      "type": "Radix/Shadcn UI Accordion",
+      "style": "Separated rows with subtle border bottom, expanded state background bg-brand/5, gold accent icon transition"
+    },
+    "FloatingCTA": {
+      "type": "Fixed Floating Action Button",
+      "position": "bottom-6 left-6 z-50",
+      "components": [
+        "زر الواتساب المباشر ذو التنبيه النابض اللطيف",
+        "زر العودة للأعلى (Back To Top) الناعم"
+      ]
+    }
+  },
+  "motion_and_interactions": {
+    "engine": "framer-motion + Lenis smooth scroll",
+    "reduced_motion": "جميع التحريكات محاطة بـ useReducedMotion أو CSS @media (prefers-reduced-motion: reduce) للحفاظ على إمكانية الوصول",
+    "stagger_children": "تتابع محذق بفاصل 0.1 ثانية للبطاقات والقوائم",
+    "micro_interactions": "تكبير طفيف على الصورة scale-105 عند تحويم البطاقة، وتغير لون الحدود بالكامل من الأبيض/الأخضر إلى الذهبي"
+  },
+  "media_and_image_urls": [
+    {
+      "category": "hero_background",
+      "url": "https://images.unsplash.com/photo-1605237165959-dcc784975d51?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxzYXVkaSUyMGFyY2hpdGVjdHVyZSUyMGxhbmRtYXJrJTIwcml5YWRoJTIwZW1iYXNzeSUyMGNvcnBvcmF0ZSUyMGJ1c2luZXNzfGVufDB8fHx8MTc5MjYxODg0N3ww&ixlib=rb-4.1.0&q=85",
+      "description": "معمارية ثقافة سعودية أصيلة ومبنى رسمي يعكس الطابع المؤسسي المعتمد"
+    },
+    {
+      "category": "riyadh_skyline",
+      "url": "https://images.pexels.com/photos/35761/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "أبراج مركز المملكة بجمالية الإضاءة المسائية لخدمات العمل والتأشيرات"
+    },
+    {
+      "category": "financial_district",
+      "url": "https://images.pexels.com/photos/36895565/pexels-photo-36895565.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "منطقة الأعمال والقطاع المالي لخدمات الشركات والحلول المؤسسية"
+    }
+  ],
+  "accessibility_and_testing": {
+    "data_testid_rule": "يجب إضافة data-testid لكل عنصر تفاعلي أو عنوان أو زر أو هاتف (مثال: data-testid='hero-whatsapp-btn', data-testid='service-card-qvp', data-testid='header-nav-link-about')",
+    "rtl_support": "إعداد dir='rtl' على المستوى الرئيسي مع مراعاة الهوامش البصرية والأيقونات السهمية المتجهة لليسار عند متابعة السير",
+    "phone_number_standard": "رقم الهاتف والواتساب الموحد المعتمد: +962 7 9262 2210"
   },
   "instructions_to_main_agent": [
-    "Initialize standard React app with Tailwind CSS.",
-    "Add 'dir=\"rtl\"' to the root HTML element in index.html.",
-    "Install and configure @fontsource/alexandria and @fontsource/ibm-plex-sans-arabic.",
-    "Install 'framer-motion', '@studio-freight/lenis', 'react-fast-marquee', and 'lucide-react'.",
-    "Do NOT use HTML forms or database logic. The CTA buttons should strictly be 'href=\"tel:+962792622210\"' or 'href=\"https://wa.me/962792622210\"'.",
-    "Use logical Tailwind properties (ps, pe, text-start) for perfect RTL support.",
-    "Create a dedicated Legal Layout for Privacy Policy and Terms of Use pages.",
-    "Ensure 'Awwwards' level finish: implement custom cursor, smooth scrolling, and scroll-triggered animations for all sections."
+    "عدم تغيير لون الهوية الأخضر (#006C35) أو العناوين بالخط Alexandria والنصوص بالخط IBM Plex Sans Arabic.",
+    "تجنب استخدام الإيموجيات كأيقونات كليًا؛ استخدام Lucide React / Phosphor Icons بحجم وسماكة متناسقة strokeWidth={1.75}.",
+    "عدم وضع أي أرقام تراخيص وهمية أو وعود بضمان التوظيف؛ التأكيد المستمر على أن المكتب جهة إنجاز معاملات ومتابعة معتمدة.",
+    "تنسيق كافة النصوص العربية الكثيفة بطريقة إديتوريال راقية (عناوين فرعية، قوائم جانبية، صناديق تنبيه متميزة بحدود ذهبية).",
+    "التأكد من أن كافة مكونات الصفحات تحتفظ بـ data-testid لضمان الجاهزية التامة للاختبارات الأوتوماتيكية."
   ],
-  "universal_guidelines": [
-    "Never center-align long blocks of text; text-start (right-aligned in RTL) is mandatory for readability.",
-    "Implement high-end glassmorphism for sticky headers (blur-xl, saturate-150, light background opacity).",
-    "Use 2-3x more spacing than default templates. Sections should breathe.",
-    "Do not use default system fonts. Typography is the main visual driver here."
+  "GENERAL UI UX DESIGN GUIDELINES": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. Always add transitions for specific interactive elements.",
+    "You MUST NOT center align the app container. Preserve natural reading flow.",
+    "Always use modern button styles like sharp/pill-shaped button with interaction animations & color relevant to the app style",
+    "NEVER use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, selection states, and loading animations separate good from extraordinary."
   ]
 }

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, MessageCircle, Phone } from "lucide-react";
+import { ArrowDown, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { MaskedLines } from "@/components/Reveal";
 import { HERO, CONTACT } from "@/lib/content";
 
@@ -38,6 +38,17 @@ export default function Hero() {
         style={{ y, opacity }}
         className="relative z-10 container-x min-h-[100svh] flex flex-col justify-center pt-24 pb-32"
       >
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.7 }}
+          className="inline-flex items-center gap-2 self-start border border-brand-gold/50 bg-brand-gold/10 backdrop-blur-sm text-brand-gold px-4 py-2 text-xs md:text-sm font-bold mb-8"
+          data-testid="hero-accreditation-badge"
+        >
+          <ShieldCheck size={16} className="shrink-0" />
+          {HERO.badge}
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -106,7 +117,7 @@ export default function Hero() {
       </motion.div>
 
       <a
-        href="#services"
+        href="#about"
         className="absolute bottom-8 start-6 md:start-12 z-10 hidden md:flex items-center gap-2 text-white/70 text-xs tracking-widest hover:text-white transition-colors"
         data-testid="hero-scroll-indicator"
       >

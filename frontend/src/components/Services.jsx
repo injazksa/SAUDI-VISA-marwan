@@ -3,6 +3,14 @@ import { ArrowLeft, ArrowUpLeft, FileText } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SERVICES, CONTACT } from "@/lib/content";
 
+// شبكة Bento غير متماثلة: بطاقتان عريضتان وبطاقتان مضغوطتان
+const SPANS = [
+  "lg:col-span-7",
+  "lg:col-span-5",
+  "lg:col-span-5",
+  "lg:col-span-7",
+];
+
 export default function Services() {
   return (
     <section id="services" className="py-20 md:py-32 lg:py-40 bg-paper" data-testid="services-section">
@@ -15,19 +23,20 @@ export default function Services() {
             <span className="text-brand">معاملات السفارة السعودية</span>
           </h2>
           <p className="mt-6 text-lg text-gray-600 font-light leading-relaxed">
-            من تأشيرات العمل والتفويض الإلكتروني إلى تصديق الشهادات والوكالات — نديرها
-            بدقّة وسرعة، من الاستشارة الأولى حتى تسليم وثائقكم مصدّقة وجاهزة.
+            بصفتنا مكتباً مرخصاً ومعتمداً من السفارة السعودية في الأردن، ندير
+            معاملاتكم بدقّة — من تأشيرات العمل والتفويض الإلكتروني إلى تصديق
+            الشهادات والاعتماد المهني — من الاستشارة الأولى حتى التسليم.
           </p>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 border-t border-s border-black/10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-6">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
             return (
-              <Reveal key={s.id} delay={i * 0.08} data-testid={`service-card-${s.id}`}>
+              <Reveal key={s.id} delay={i * 0.08} className={SPANS[i % 4]} data-testid={`service-card-${s.id}`}>
                 <Link
                   to={`/services/${s.slug}`}
-                  className="group relative block border-b border-e border-black/10 bg-white p-8 md:p-12 hover:bg-brand-ink transition-colors duration-500 h-full"
+                  className="group relative flex flex-col border border-black/10 bg-white p-8 md:p-12 hover:bg-brand-ink transition-colors duration-500 h-full"
                   data-testid={`service-card-link-${s.id}`}
                 >
                   <div className="flex items-start justify-between">
@@ -67,17 +76,19 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  <div className="mt-6 pt-5 border-t border-black/10 group-hover:border-white/15 flex items-start gap-2 transition-colors duration-500">
-                    <FileText size={16} className="text-brand-gold mt-0.5 shrink-0" />
-                    <span className="text-xs text-gray-500 group-hover:text-white/60 transition-colors duration-500">
-                      {s.note}
+                  <div className="mt-auto pt-6">
+                    <div className="pt-5 border-t border-black/10 group-hover:border-white/15 flex items-start gap-2 transition-colors duration-500">
+                      <FileText size={16} className="text-brand-gold mt-0.5 shrink-0" />
+                      <span className="text-xs text-gray-500 group-hover:text-white/60 transition-colors duration-500">
+                        {s.note}
+                      </span>
+                    </div>
+
+                    <span className="mt-6 inline-flex items-center gap-2 text-brand group-hover:text-brand-gold font-medium text-sm transition-colors duration-500">
+                      اقرأ تفاصيل الخدمة
+                      <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-300" />
                     </span>
                   </div>
-
-                  <span className="mt-6 inline-flex items-center gap-2 text-brand group-hover:text-brand-gold font-medium text-sm transition-colors duration-500">
-                    اقرأ تفاصيل الخدمة
-                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                  </span>
                 </Link>
               </Reveal>
             );

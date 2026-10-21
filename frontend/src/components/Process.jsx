@@ -22,19 +22,16 @@ export default function Process() {
           </h2>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
           {PROCESS.map((p, i) => (
             <Reveal
-              key={p.num}
+              key={p.label}
               delay={i * 0.1}
-              className="relative pt-10 border-t border-white/15"
-              data-testid={`process-step-${p.num}`}
+              className="relative pt-8 border-t border-white/15"
+              data-testid={`process-step-${i}`}
             >
-              <span className="absolute -top-2 end-0 font-heading text-7xl md:text-8xl font-black text-white/[0.06] pointer-events-none">
-                {p.num}
-              </span>
-              <div className="font-heading text-brand-gold text-lg mb-3">
-                {p.num}
+              <div className="text-brand-gold text-sm font-bold tracking-wide mb-3">
+                {p.label}
               </div>
               <h3 className="font-heading text-2xl font-medium mb-3">
                 {p.title}

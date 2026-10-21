@@ -1,31 +1,47 @@
 import { Reveal } from "@/components/Reveal";
-import { TRUST } from "@/lib/content";
+import { ShieldCheck } from "lucide-react";
+import { ACCREDITATION } from "@/lib/content";
 
 export default function Trust() {
   return (
     <section
-      id="trust"
-      className="py-20 md:py-32 lg:py-40 bg-white"
-      data-testid="trust-section"
+      id="accreditation"
+      className="py-20 md:py-32 lg:py-40 bg-white relative overflow-hidden"
+      data-testid="accreditation-section"
     >
       <div className="container-x">
-        <Reveal className="max-w-3xl mb-16 md:mb-20">
-          <p className="overline mb-4">لماذا نحن</p>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-brand-ink leading-tight">
-            موثوقية تُبنى على
-            <br />
-            <span className="text-brand">الدقّة والالتزام</span>
-          </h2>
+        {/* بطاقة الاعتماد الرسمي */}
+        <Reveal
+          className="relative max-w-4xl mx-auto text-center bg-paper border-2 border-brand-gold/30 p-10 md:p-16"
+          data-testid="accreditation-card"
+        >
+          <div className="absolute inset-3 border border-brand-gold/20 pointer-events-none" />
+          <div className="relative z-10">
+            <div className="w-16 h-16 mx-auto flex items-center justify-center border border-brand-gold/50 text-brand-gold mb-8">
+              <ShieldCheck size={30} strokeWidth={1.5} />
+            </div>
+            <p className="overline mb-4">{ACCREDITATION.overline}</p>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-light text-brand-ink leading-tight">
+              {ACCREDITATION.title}
+            </h2>
+            <p className="mt-8 text-lg md:text-xl text-gray-700 font-light leading-loose max-w-3xl mx-auto">
+              {ACCREDITATION.statement}
+            </p>
+            <p className="mt-8 pt-6 border-t border-black/10 text-sm text-gray-500 leading-relaxed max-w-2xl mx-auto">
+              {ACCREDITATION.note}
+            </p>
+          </div>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-s border-black/10">
-          {TRUST.map((t, i) => {
+        {/* نقاط الثقة */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-s border-black/10 mt-16 md:mt-24">
+          {ACCREDITATION.points.map((t, i) => {
             const Icon = t.icon;
             return (
               <Reveal
                 key={t.title}
                 delay={i * 0.06}
-                className="group relative border-b border-e border-black/10 bg-paper hover:bg-brand-ink transition-colors duration-500 p-8 md:p-10 min-h-[240px] flex flex-col justify-between"
+                className="group relative border-b border-e border-black/10 bg-white hover:bg-brand-ink transition-colors duration-500 p-8 md:p-10 min-h-[220px] flex flex-col justify-between"
                 data-testid={`trust-item-${i}`}
               >
                 <div className="w-14 h-14 flex items-center justify-center border border-brand/30 text-brand group-hover:text-brand-gold group-hover:border-brand-gold/50 transition-colors duration-500">

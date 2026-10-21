@@ -21,8 +21,9 @@ export default function Footer({ isHome = true }) {
               </div>
             </div>
             <p className="text-white/60 leading-relaxed font-light max-w-md">
-              {BRAND.fullName} — نُنجز معاملاتكم لدى السفارة السعودية في الأردن
-              بسرعة وموثوقية وإتقان.
+              {BRAND.fullName} — نُنجز معاملاتكم لدى السفارة السعودية في الأردن:
+              تأشيرات العمل، تصديق الشهادات والوثائق، والاعتماد المهني، بسرعة
+              وموثوقية وإتقان.
             </p>
             <div className="flex items-start gap-3 mt-6 text-white/70 text-sm">
               <MapPin size={18} className="text-brand-gold mt-0.5 shrink-0" />
@@ -57,6 +58,25 @@ export default function Footer({ isHome = true }) {
                   )}
                 </li>
               ))}
+              <li>
+                {isHome ? (
+                  <a
+                    href="#contact"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    data-testid="footer-link-contact"
+                  >
+                    تواصل معنا
+                  </a>
+                ) : (
+                  <Link
+                    to="/#contact"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    data-testid="footer-link-contact"
+                  >
+                    تواصل معنا
+                  </Link>
+                )}
+              </li>
             </ul>
           </div>
 
@@ -118,7 +138,7 @@ export default function Footer({ isHome = true }) {
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-white/50 text-sm">
           <p>© {year} {BRAND.fullName}. جميع الحقوق محفوظة.</p>
           <p className="text-white/40">
-            مكتب مستقل معتمد — ليس جهة حكومية ولا يمثّل السفارة رسمياً.
+            مكتب مرخّص ومعتمد من السفارة السعودية في الأردن لإنجاز المعاملات — القرار النهائي للجهات الرسمية المختصة.
           </p>
         </div>
       </div>

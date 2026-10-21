@@ -4,10 +4,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import EditorialMarquee from "@/components/Marquee";
+import About from "@/components/About";
+import Trust from "@/components/Trust";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
-import Trust from "@/components/Trust";
-import About from "@/components/About";
 import Blog from "@/components/Blog";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
@@ -37,10 +37,10 @@ export default function Home() {
         <main>
           <Hero />
           <EditorialMarquee />
-          <Services />
+          <About />
+          <Trust />
+          <div className="cv-auto"><Services /></div>
           <div className="cv-auto"><Process /></div>
-          <div className="cv-auto"><About /></div>
-          <div className="cv-auto"><Trust /></div>
           <div className="cv-auto"><Blog /></div>
           <div className="cv-auto"><Faq /></div>
           <div className="cv-auto"><Contact /></div>
