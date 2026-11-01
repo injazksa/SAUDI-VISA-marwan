@@ -138,7 +138,7 @@ export default function Footer({ isHome = true }) {
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-white/50 text-sm">
           <p>© {year} {BRAND.fullName}. جميع الحقوق محفوظة.</p>
           <p className="text-white/40">
-            مكتب مرخّص ومعتمد من السفارة السعودية في الأردن لإنجاز المعاملات — القرار النهائي للجهات الرسمية المختصة.
+            نُنجز المعاملات لدى السفارة السعودية في الأردن — والقرار النهائي في قبول أي معاملة يعود للجهات الرسمية المختصة.
           </p>
         </div>
       </div>

@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   FileText,
   Phone,
-  ShieldCheck,
   AlertTriangle,
   Info,
   ChevronLeft,
@@ -578,17 +577,6 @@ export default function ServicePage() {
               <ChevronLeft size={14} />
               <span className="text-brand-gold">{details.heading}</span>
             </nav>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 border border-brand-gold/40 bg-brand-gold/10 text-brand-gold px-4 py-2 text-xs md:text-sm font-bold mb-8"
-              data-testid="service-accreditation-badge"
-            >
-              <ShieldCheck size={16} />
-              مكتب مرخّص ومعتمد من السفارة السعودية في الأردن
-            </motion.div>
 
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 border border-brand-gold/40 flex items-center justify-center text-brand-gold">
