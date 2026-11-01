@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend regression after license-phrase reduction + new hero image. All critical checks pass. HOME: license phrase 'مكتب مرخّص ومعتمد من السفارة السعودية في الأردن' appears exactly in 5 allowed locations only — hero-accreditation-badge, accreditation-card h2, trust-item-0 (الترخيص والاعتماد), faq-answer-0, and footer brand bio. New hero image /gen/hero-1-office.webp loads with HTTP 200 and renders. Marquee starts with 'إنجاز معاملات السفارة السعودية في الأردن' and contains NO license phrase. Services section intro no longer starts with 'بصفتنا مكتباً مرخصاً' (starts with 'خدماتنا'). Footer bottom line is the new 'نُنجز المعاملات لدى السفارة السعودية في الأردن — والقرار النهائي...'. About section has 3 SVG-marked bullet points. Home FAQ = 14 questions (toggle works, faq-0 answer contains the full license phrase as required). No decorative 01/02/03/04 numbers anywhere on home. All 4 service pages (/services/saudi-work-visa, /services/corporate-services, /services/certificate-attestation, /services/professional-verification-qvp) load with breadcrumbs; data-testid=service-accreditation-badge is correctly ABSENT on all four. License phrase appears only once per service page — inside footer brand bio (acceptable 'سطر الشعار في التذييل'). Header nav = 7 anchor links (الرئيسية, من نحن, الترخيص والاعتماد, خدماتنا, كيف نعمل, المدونة, الأسئلة الشائعة) + contact. Mobile drawer at 375px shows the same 7 links + تواصل معنا with full white contrast (previous iteration_17 low-contrast issue on last 2 items is RESOLVED). Contact links: wa.me/962792622210 ✓, tel:+962792622210 ✓, mailto:info@saudivisajo.com ✓. Mobile 375px — zero horizontal overflow on /, /services/saudi-work-visa, /blog/saudi-work-visa-guide. No console errors, no page errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "License phrase on service pages comes from the shared footer brand bio paragraph; this is consistent with 'سطر الشعار في التذييل' allowance and is fine. If stricter de-duplication is ever desired, the footer brand bio could use a shorter variant.",
+    "A benign console warning fires on each navigation: 'Please ensure that the container has a non-static position (relative/fixed/absolute) to ensure scroll offset is calculated correctly.' Likely from react-scroll or framer-motion scroll container. Low priority — no visual effect."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% (all requested checks passed)"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Iteration 18 verified post-redundancy-reduction changes. All 5 license-phrase whitelisted locations confirmed and all forbidden locations (service-page headers, services-section intro, marquee, work-visa/corporate intros, footer bottom line) are clean. hero-1-office.webp loads 200. Mobile drawer contrast fixed. No regressions. iteration_17's minor article-section-5 note on certificate-attestation was out of scope for this iteration; main agent should check if still required."
+}
